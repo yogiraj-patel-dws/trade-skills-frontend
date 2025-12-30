@@ -1,20 +1,24 @@
 @import "tailwindcss";
 @import "../tailwind-global.css";
 
-/* 1. Use a better box model everywhere */
+/* ================================
+   CSS RESET & BASE SETUP
+================================ */
+
+/* 1. Better box model */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* 2. Remove default margin */
+/* 2. Remove default spacing */
 * {
   margin: 0;
   padding: 0;
 }
 
-/* 3. Root & body sizing */
+/* 3. Root sizing */
 html,
 body,
 #root {

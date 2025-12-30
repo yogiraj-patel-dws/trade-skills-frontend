@@ -1,72 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap"
-    rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            /* Primary */
-            primary: "#2bee79",
-            "primary-hover": "#25d96d",
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Lexend:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-            /* Backgrounds */
-            "background-light": "#f6f8f7",
-            "background-dark": "#102217",
+    <!-- Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
 
-            /* Surfaces */
-            "surface-light": "#ffffff",
-            "surface-dark": "#162a1f",
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
-            /* Text */
-            "text-main": "#0d1b13",
-            "text-secondary": "#4c9a6b",
-          },
+    <!-- Tailwind Config -->
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              /* Primary */
+              primary: "#2bee79",
+              "primary-hover": "#25d069",
 
-          fontFamily: {
-            /* Display / Headings */
-            display: ["Plus Jakarta Sans", "Inter", "sans-serif"],
+              /* Backgrounds */
+              "background-light": "#f8fcfa",
+              "background-dark": "#102217",
 
-            /* Body text */
-            body: ["Noto Sans", "Inter", "sans-serif"],
-            sans: ["Inter", "sans-serif"],
-          },
+              /* Surfaces */
+              "surface-light": "#ffffff",
+              "surface-dark": "#1a3324",
 
-          borderRadius: {
-            DEFAULT: "0.5rem",
-            lg: "0.75rem",
-            xl: "1rem",
-            "2xl": "1.5rem",
-            full: "9999px",
-          },
+              /* Text */
+              "text-main": "#0d1b13",
+              "text-secondary": "#4c9a6b",
 
-          boxShadow: {
-            soft: "0 4px 20px -2px rgba(0, 0, 0, 0.05)",
-            glow: "0 0 15px rgba(43, 238, 121, 0.3)",
+              /* Accent / Utility */
+              "accent-bg": "#e7f3ec",
+            },
+
+            fontFamily: {
+              /* Headings */
+              display: ["Plus Jakarta Sans", "Lexend", "sans-serif"],
+
+              /* Body */
+              body: ["Noto Sans", "sans-serif"],
+              sans: ["Lexend", "sans-serif"],
+            },
+
+            borderRadius: {
+              DEFAULT: "1rem",
+              lg: "1.5rem",
+              xl: "2rem",
+              "2xl": "2.5rem",
+              full: "9999px",
+            },
+
+            boxShadow: {
+              soft: "0 4px 20px -2px rgba(0, 0, 0, 0.05)",
+              glow: "0 0 15px rgba(43, 238, 121, 0.3)",
+            },
+
+            accentColor: {
+              DEFAULT: "#2bee79",
+            },
           },
         },
-      },
-    };
-  </script>
+      };
+    </script>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>trade-skill-frontend</title>
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trade-skill-frontend</title>
+  </head>
 
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
-
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

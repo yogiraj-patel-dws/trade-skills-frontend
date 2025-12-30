@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../../constants/routes";
+
 const ExplorePage = () => {
+  const navigate = useNavigate();
   return (
     <div className="bg-background-light dark:bg-background-dark text-text-main dark:text-white font-display antialiased selection:bg-primary selection:text-black">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -200,7 +204,12 @@ const ExplorePage = () => {
               Show Filters
             </button>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-              <div className="group flex flex-col bg-white dark:bg-surface-dark rounded-2xl shadow-sm hover:shadow-soft hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-white/5 hover:border-primary/40 relative">
+              <div
+                onClick={() => {
+                  navigate(ROUTES.SESSIONS_REQUEST);
+                }}
+                className="group flex flex-col bg-white dark:bg-surface-dark rounded-2xl shadow-sm hover:shadow-soft hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-white/5 hover:border-primary/40 relative"
+              >
                 <div className="relative h-48 overflow-hidden">
                   <img
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

@@ -1,51 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#2bee79",
-              "background-light": "#f8f7f5",
-              "background-dark": "#221c10",
-              "surface-light": "#ffffff",
-              "surface-dark": "#2c2415",
-            },
-            fontFamily: {
-              display: ["Plus Jakarta Sans", "sans-serif"],
-              body: ["Noto Sans", "sans-serif"],
-            },
-            borderRadius: {
-              DEFAULT: "1rem",
-              lg: "2rem",
-              xl: "3rem",
-              full: "9999px",
-            },
-            boxShadow: {
-              glow: "0 0 20px -5px rgba(43, 238, 121, 0.4)",
-            },
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            /* Primary */
+            primary: "#2bee79",
+            "primary-hover": "#25d96d",
+
+            /* Backgrounds */
+            "background-light": "#f6f8f7",
+            "background-dark": "#102217",
+
+            /* Surfaces */
+            "surface-light": "#ffffff",
+            "surface-dark": "#162a1f",
+
+            /* Text */
+            "text-main": "#0d1b13",
+            "text-secondary": "#4c9a6b",
+          },
+
+          fontFamily: {
+            /* Display / Headings */
+            display: ["Plus Jakarta Sans", "Inter", "sans-serif"],
+
+            /* Body text */
+            body: ["Noto Sans", "Inter", "sans-serif"],
+            sans: ["Inter", "sans-serif"],
+          },
+
+          borderRadius: {
+            DEFAULT: "0.5rem",
+            lg: "0.75rem",
+            xl: "1rem",
+            "2xl": "1.5rem",
+            full: "9999px",
+          },
+
+          boxShadow: {
+            soft: "0 4px 20px -2px rgba(0, 0, 0, 0.05)",
+            glow: "0 0 15px rgba(43, 238, 121, 0.3)",
           },
         },
-      };
-    </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>trade-skill-frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+      },
+    };
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>trade-skill-frontend</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

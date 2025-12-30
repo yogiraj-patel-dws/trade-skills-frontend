@@ -29,3 +29,53 @@ body,
 html {
   scroll-behavior: smooth;
 }
+
+/* ============================
+   Custom Scrollbar
+============================ */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #e5e7eb;
+  border-radius: 20px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #374151;
+}
+
+/* ============================
+   Shimmer Animation
+============================ */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(to right,
+      #f6f7f8 4%,
+      #edeef1 25%,
+      #f6f7f8 36%);
+  background-size: 1000px 100%;
+}
+
+.dark .animate-shimmer {
+  background: linear-gradient(to right,
+      #1f2937 4%,
+      #374151 25%,
+      #1f2937 36%);
+  background-size: 1000px 100%;
+}

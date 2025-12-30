@@ -1,10 +1,28 @@
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { Form, Input, Button, message } from "antd";
 import { ROUTES } from "../../../constants/routes";
-import { Form, Input, Button } from "antd";
+import { useAppMutation } from "../../../react-query/useAppMutation";
+import { authService } from "../../../services/auth/auth.service";
+import type { LoginPayload } from "../../../services/auth/auth.types";
 
 const Login = () => {
-  const onFinish = (values: any) => {
-    console.log("✅ Login Final Output:", values);
+  const navigate = useNavigate();
+
+  const { mutate: login, isPending } = useAppMutation(
+    (values: LoginPayload) => authService.login(values),
+    {
+      onSuccess: () => {
+        message.success("Login successful!");
+        navigate(ROUTES.DASHBOARD);
+      },
+      onError: (error) => {
+        message.error(error.message || "Login failed. Please try again.");
+      },
+    }
+  );
+
+  const onFinish = (values: LoginPayload) => {
+    login(values);
   };
 
   return (
@@ -138,12 +156,16 @@ const Login = () => {
             {/* SUBMIT */}
             <Button
               htmlType="submit"
+              loading={isPending}
+              disabled={isPending}
               className="mt-2 w-full h-14 bg-gradient-to-r from-primary to-[#4ade80] hover:to-primary text-[#221c10] font-bold text-lg rounded-full shadow-glow transform active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 group/btn"
             >
-              <span>Log In</span>
-              <span className="material-symbols-outlined text-[20px] font-bold group-hover/btn:translate-x-1 transition-transform">
-                arrow_forward
-              </span>
+              <span>{isPending ? "Logging in..." : "Log In"}</span>
+              {!isPending && (
+                <span className="material-symbols-outlined text-[20px] font-bold group-hover/btn:translate-x-1 transition-transform">
+                  arrow_forward
+                </span>
+              )}
             </Button>
           </Form>
 

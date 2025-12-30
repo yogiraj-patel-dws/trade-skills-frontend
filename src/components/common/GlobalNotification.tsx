@@ -19,7 +19,7 @@ const GlobalNotification = () => {
     if (!toast) return;
 
     api[toast.type ?? "info"]({
-      message: toast.title,
+      title: toast.title,
       description: toast.description,
       placement: toast.placement ?? "topRight",
       duration: toast.duration ?? 3,

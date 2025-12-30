@@ -2,9 +2,46 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../../../constants/routes";
 import { Form, Input, Button } from "antd";
 
+import { useNavigate } from "react-router-dom";
+import { useAtom } from "jotai";
+import { useState } from "react";
+import { toastAtom } from "../../../atoms/toast/toast.atoms";
+import { authService } from "../../../services/auth/auth.service";
+import type { RegisterPayload } from "../../../services/auth/auth.types";
+
 const index = () => {
-  const onFinish = (values: any) => {
-    console.log("✅ Signup Final Output:", values);
+  const navigate = useNavigate();
+  const [, setToast] = useAtom(toastAtom);
+  const [loading, setLoading] = useState(false);
+
+  const onFinish = async (values: any) => {
+    setLoading(true);
+    try {
+      const payload: RegisterPayload = {
+        email: values.email,
+        password: values.password,
+        firstName: values.firstName,
+        lastName: values.lastName,
+      };
+
+      await authService.register(payload);
+
+      setToast({
+        type: "success",
+        title: "Account created successfully",
+        description: "Welcome to TradeSkill!",
+      });
+
+      navigate(ROUTES.DASHBOARD);
+    } catch (error: any) {
+      setToast({
+        type: "error",
+        title: "Signup failed",
+        description: error.message || "Please try again later.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -245,6 +282,7 @@ const index = () => {
             {/* SUBMIT */}
             <Button
               htmlType="submit"
+              loading={loading}
               className="mt-2 w-full h-[56px] flex items-center justify-center rounded-full bg-gradient-to-r from-primary to-[#55f096] text-[#1c170d] text-base font-bold tracking-[0.015em] hover:brightness-105 active:scale-[0.98] transition-all shadow-[0_4px_14px_0_rgba(43,238,121,0.39)]"
             >
               Create Account

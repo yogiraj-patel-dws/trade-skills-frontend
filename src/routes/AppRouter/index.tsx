@@ -17,6 +17,7 @@ import Signup from "../../pages/auth/Signup";
 import Login from "../../pages/auth/Login";
 import Register from "../../pages/auth/Register";
 import ForgotPassword from "../../pages/auth/ForgotPassword";
+import ResetPassword from "../../pages/auth/ResetPassword";
 import VerifyEmail from "../../pages/auth/VerifyEmail";
 
 // Protected Pages
@@ -91,6 +92,14 @@ const AppRouter = () => {
           element={
             <AuthLayout>
               <ForgotPassword />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path={ROUTES.RESET_PASSWORD}
+          element={
+            <AuthLayout>
+              <ResetPassword />
             </AuthLayout>
           }
         />

@@ -231,3 +231,20 @@ details[open] summary ~ * {
 .transaction-row:hover {
   background-color: #f1f5f9;
 }
+
+/* plans page */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+.card-highlight {
+  position: relative;
+  z-index: 10;
+  transform: scale(1.02);
+  border-color: #2bee79;
+  box-shadow: 0 10px 40px -10px rgba(43, 238, 121, 0.25);
+}
+@media (max-width: 1024px) {
+  .card-highlight {
+    transform: scale(1);
+  }
+}

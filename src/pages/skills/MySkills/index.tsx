@@ -1,6 +1,8 @@
 import { SkillCard } from "../../../components/skills/SkillCard";
 import { Button } from 'antd';
 import { Monitor, BarChart3, ChefHat } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../constants/routes';
 
 interface Skill {
   id: string;
@@ -62,6 +64,11 @@ const skillsData: Skill[] = [
 ];
 
 const MySkills = () => {
+  const navigate = useNavigate();
+
+  const handleAddSkill = () => {
+    navigate(ROUTES.ADD_SKILL);
+  };
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900">
       {/* Main Content */}
@@ -76,6 +83,7 @@ const MySkills = () => {
           <Button 
             type="primary" 
             size="large"
+            onClick={handleAddSkill}
             className="bg-emerald-500! hover:bg-emerald-600! border-none! px-6 font-bold h-12 rounded-xl! shadow-sm flex items-center gap-2"
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">

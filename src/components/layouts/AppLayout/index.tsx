@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import Navigation from '../../Header';
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -7,7 +8,7 @@ interface AppLayoutProps {
 const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <div>
-      <header>App Header</header>
+      <Navigation />
       <main>{children}</main>
       <footer>App Footer</footer>
     </div>

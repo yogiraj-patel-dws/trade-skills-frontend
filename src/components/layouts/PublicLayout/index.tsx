@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import Navigation from '../../Header';
 
 interface PublicLayoutProps {
   children: ReactNode;
@@ -7,7 +8,7 @@ interface PublicLayoutProps {
 const PublicLayout = ({ children }: PublicLayoutProps) => {
   return (
     <div>
-      <header className="bg-primary">Public Header</header>
+      <Navigation />
       <main>{children}</main>
       <footer>Public Footer</footer>
     </div>

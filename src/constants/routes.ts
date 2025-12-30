@@ -16,6 +16,7 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   PROFILE_COMPLETE: "/profile/complete",
   SKILLS: "/skills",
+  ADD_SKILL: "/skills/add",
   EXPLORE: "/explore",
   SESSIONS_REQUEST: "/sessions/request",
   SESSIONS: "/sessions",

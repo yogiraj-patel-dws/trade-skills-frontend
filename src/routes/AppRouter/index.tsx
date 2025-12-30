@@ -24,6 +24,7 @@ import VerifyEmail from "../../pages/auth/VerifyEmail";
 import UserDashboard from "../../pages/dashboard/UserDashboard";
 import ProfileCompletion from "../../pages/profile/ProfileCompletion";
 import MySkills from "../../pages/skills/MySkills";
+import AddSkill from "../../pages/skills/AddSkills";
 import ExplorePage from "../../pages/skills/ExplorePage";
 import RequestSession from "../../pages/sessions/RequestSession";
 import MySessions from "../../pages/sessions/MySessions";
@@ -141,6 +142,17 @@ const AppRouter = () => {
             <ProtectedRoute>
               <AppLayout>
                 <MySkills />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path={ROUTES.ADD_SKILL}
+          element={
+            <ProtectedRoute>
+              <AppLayout>
+                <AddSkill />
               </AppLayout>
             </ProtectedRoute>
           }

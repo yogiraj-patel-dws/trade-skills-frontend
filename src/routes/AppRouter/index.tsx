@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute";
+import { ROUTES } from "../../constants/routes";
 
 // Layouts
 import PublicLayout from "../../components/layouts/PublicLayout";
@@ -36,7 +37,7 @@ const AppRouter = () => {
       <Routes>
         {/* Public Routes */}
         <Route
-          path="/"
+          path={ROUTES.HOME}
           element={
             <PublicLayout>
               <Landing />
@@ -44,7 +45,7 @@ const AppRouter = () => {
           }
         />
         <Route
-          path="/about"
+          path={ROUTES.ABOUT}
           element={
             <PublicLayout>
               <AboutUs />
@@ -52,7 +53,7 @@ const AppRouter = () => {
           }
         />
         <Route
-          path="/contact"
+          path={ROUTES.CONTACT}
           element={
             <PublicLayout>
               <ContactUs />
@@ -62,7 +63,7 @@ const AppRouter = () => {
 
         {/* Auth Routes */}
         <Route
-          path="/signup"
+          path={ROUTES.SIGNUP}
           element={
             <AuthLayout>
               <Signup />
@@ -70,7 +71,7 @@ const AppRouter = () => {
           }
         />
         <Route
-          path="/login"
+          path={ROUTES.LOGIN}
           element={
             <AuthLayout>
               <Login />
@@ -78,7 +79,7 @@ const AppRouter = () => {
           }
         />
         <Route
-          path="/register"
+          path={ROUTES.REGISTER}
           element={
             <AuthLayout>
               <Register />
@@ -86,7 +87,7 @@ const AppRouter = () => {
           }
         />
         <Route
-          path="/forgot-password"
+          path={ROUTES.FORGOT_PASSWORD}
           element={
             <AuthLayout>
               <ForgotPassword />
@@ -94,7 +95,7 @@ const AppRouter = () => {
           }
         />
         <Route
-          path="/verify-email"
+          path={ROUTES.VERIFY_EMAIL}
           element={
             <AuthLayout>
               <VerifyEmail />
@@ -104,7 +105,7 @@ const AppRouter = () => {
 
         {/* Protected Routes */}
         <Route
-          path="/dashboard"
+          path={ROUTES.DASHBOARD}
           element={
             <ProtectedRoute>
               <AppLayout>
@@ -115,7 +116,7 @@ const AppRouter = () => {
         />
 
         <Route
-          path="/profile/complete"
+          path={ROUTES.PROFILE_COMPLETE}
           element={
             <ProtectedRoute>
               <AppLayout>
@@ -126,7 +127,7 @@ const AppRouter = () => {
         />
 
         <Route
-          path="/skills"
+          path={ROUTES.SKILLS}
           element={
             <ProtectedRoute>
               <AppLayout>
@@ -137,7 +138,7 @@ const AppRouter = () => {
         />
 
         <Route
-          path="/explore"
+          path={ROUTES.EXPLORE}
           element={
             <ProtectedRoute>
               <AppLayout>
@@ -148,7 +149,7 @@ const AppRouter = () => {
         />
 
         <Route
-          path="/sessions/request"
+          path={ROUTES.SESSIONS_REQUEST}
           element={
             <ProtectedRoute>
               <AppLayout>
@@ -159,7 +160,7 @@ const AppRouter = () => {
         />
 
         <Route
-          path="/sessions"
+          path={ROUTES.SESSIONS}
           element={
             <ProtectedRoute>
               <AppLayout>
@@ -170,7 +171,7 @@ const AppRouter = () => {
         />
 
         <Route
-          path="/sessions/review"
+          path={ROUTES.SESSIONS_REVIEW}
           element={
             <ProtectedRoute>
               <AppLayout>
@@ -181,7 +182,7 @@ const AppRouter = () => {
         />
 
         <Route
-          path="/wallet"
+          path={ROUTES.WALLET}
           element={
             <ProtectedRoute>
               <AppLayout>
@@ -192,7 +193,7 @@ const AppRouter = () => {
         />
 
         <Route
-          path="/plans"
+          path={ROUTES.PLANS}
           element={
             <ProtectedRoute>
               <AppLayout>
@@ -203,7 +204,7 @@ const AppRouter = () => {
         />
 
         <Route
-          path="/withdraw"
+          path={ROUTES.WITHDRAW}
           element={
             <ProtectedRoute>
               <AppLayout>

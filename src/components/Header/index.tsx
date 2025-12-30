@@ -56,8 +56,8 @@ const Navigation = () => {
                             Dashboard
                         </Link>
                         <Link
-                            to="/myskills"
-                            className={`text-[15px] font-bold transition-colors ${isActive('/myskills') ? 'text-slate-900' : 'text-slate-500 hover:text-slate-800'}`}
+                            to="/skills"
+                            className={`text-[15px] font-bold transition-colors ${isActive('/skills') ? 'text-slate-900' : 'text-slate-500 hover:text-slate-800'}`}
                         >
                             My skills
                         </Link>

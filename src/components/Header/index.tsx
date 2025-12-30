@@ -88,6 +88,16 @@ const Navigation = () => {
               My skills
             </Link>
             <Link
+              to={ROUTES.SESSIONS}
+              className={`text-[15px] font-bold transition-colors ${
+                isActive(ROUTES.SESSIONS)
+                  ? "text-slate-900"
+                  : "text-slate-500 hover:text-slate-800"
+              }`}
+            >
+              My Sessions
+            </Link>
+            <Link
               to={ROUTES.ABOUT}
               className={`text-[15px] font-bold transition-colors ${
                 isActive(ROUTES.ABOUT)

@@ -129,3 +129,86 @@ export const ACTIVITY_ITEMS = [
     time: '1 hour ago'
   }
 ];
+
+// Sessions Data
+export const LEARNING_SESSIONS = [
+  {
+    title: "Advanced React Patterns",
+    host: "Sarah J.",
+    duration: "1h 30m",
+    level: "Intermediate",
+    cost: "-15",
+    status: "Scheduled",
+    image: "https://api.dicebear.com/7.x/shapes/svg?seed=React",
+    hostImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
+  },
+  {
+    title: "Pottery Basics",
+    host: "Mike T.",
+    duration: "2h 00m",
+    level: "Beginner",
+    cost: "-20",
+    status: "Requested",
+    image: "https://api.dicebear.com/7.x/shapes/svg?seed=Pottery",
+    hostImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mike"
+  },
+  {
+    title: "Guitar for Beginners",
+    host: "David L.",
+    duration: "45m",
+    level: "Beginner",
+    cost: "-10",
+    status: "Completed",
+    date: "Mar 12, 2023",
+    image: "https://api.dicebear.com/7.x/shapes/svg?seed=Guitar",
+    hostImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=David"
+  }
+];
+
+export const TEACHING_SESSIONS = [
+  {
+    title: "Advanced React Patterns",
+    duration: "60 mins",
+    credits: "+40",
+    status: "Requested" as const,
+    learner: "Sarah Jenkins",
+    learnerImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+    icon: "💻"
+  },
+  {
+    title: "Guitar Basics: Chords",
+    duration: "45 mins",
+    credits: "+25",
+    status: "Scheduled" as const,
+    learner: "Mike Ross",
+    learnerImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Mike",
+    icon: "🎸"
+  },
+  {
+    title: "Digital Illustration 101",
+    duration: "90 mins",
+    credits: "+60",
+    status: "Scheduled" as const,
+    learner: "Emily Chen",
+    learnerImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emily",
+    icon: "🎨"
+  },
+  {
+    title: "French Conversation",
+    duration: "30 mins",
+    credits: "+15",
+    status: "Completed" as const,
+    learner: "Jean Luc",
+    learnerImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jean",
+    icon: "🗣️"
+  },
+  {
+    title: "Portrait Photography",
+    duration: "60 mins",
+    credits: "+30",
+    status: "Rejected" as const,
+    learner: "Alice Wong",
+    learnerImage: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice",
+    icon: "📷"
+  }
+];

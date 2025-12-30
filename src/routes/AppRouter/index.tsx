@@ -148,6 +148,17 @@ const AppRouter = () => {
         />
 
         <Route
+          path={ROUTES.SESSIONS}
+          element={
+            <ProtectedRoute>
+              <AppLayout>
+                <MySessions />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path={ROUTES.ADD_SKILL}
           element={
             <ProtectedRoute>

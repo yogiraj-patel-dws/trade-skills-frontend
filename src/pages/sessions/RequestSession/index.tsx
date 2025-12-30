@@ -176,6 +176,30 @@ const RequestSession = () => {
             <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-black/5">
               <div className="mb-6">
                 <h2 className="text-xl font-bold text-text-main">
+                  Session Duration
+                </h2>
+                <p className="text-sm text-text-secondary">
+                  Select the duration you would like to book for this session.
+                </p>
+              </div>
+              <div className="relative w-full">
+                <select className="w-full appearance-none rounded-2xl border-none bg-background-light px-5 py-4 text-text-main shadow-sm ring-1 ring-[#e7f3ec] focus:ring-2 focus:ring-primary focus:outline-none transition-all cursor-pointer">
+                  <option value="30">30 mins</option>
+                  <option value="45">45 mins</option>
+                  <option value="60">60 mins</option>
+                  <option value="75">75 mins</option>
+                  <option value="90">90 mins</option>
+                  <option value="105">105 mins</option>
+                  <option value="120">120 mins</option>
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-primary">
+                  <span className="material-symbols-outlined">expand_more</span>
+                </div>
+              </div>
+            </section>
+            <section className="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-black/5">
+              <div className="mb-6">
+                <h2 className="text-xl font-bold text-text-main">
                   Propose Availability
                 </h2>
                 <p className="text-sm text-text-secondary">
@@ -252,26 +276,22 @@ const RequestSession = () => {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between border-b border-[#f0f0f0] pb-4">
                       <span className="text-text-secondary">
-                        Selected Topics
+                        Total Selected Duration
                       </span>
-                      <span className="font-medium text-text-main">2</span>
-                    </div>
-                    <div className="flex items-center justify-between border-b border-[#f0f0f0] pb-4">
-                      <span className="text-text-secondary">Duration</span>
                       <span className="font-bold text-text-main text-lg">
-                        40 mins
+                        60 mins
                       </span>
                     </div>
                     <div className="flex items-center justify-between pt-1">
                       <span className="text-text-secondary">
-                        Estimated Cost
+                        Estimated Credits Required
                       </span>
                       <div className="text-right">
                         <span className="block text-2xl font-black text-primary">
-                          40 Credits
+                          60 Credits
                         </span>
                         <span className="text-xs text-text-secondary">
-                          ~ $40.00 USD
+                          ~ $60.00 USD
                         </span>
                       </div>
                     </div>
@@ -309,7 +329,7 @@ const RequestSession = () => {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-xs text-text-secondary">Total Est.</p>
-            <p className="text-lg font-bold text-primary">40 Credits</p>
+            <p className="text-lg font-bold text-primary">60 Credits</p>
           </div>
           <button className="flex-1 rounded-full bg-primary py-3 text-sm font-bold text-[#0d1b13]">
             Request Session

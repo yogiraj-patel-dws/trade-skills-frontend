@@ -65,17 +65,59 @@ html {
 
 .animate-shimmer {
   animation: shimmer 2s infinite linear;
-  background: linear-gradient(to right,
-      #f6f7f8 4%,
-      #edeef1 25%,
-      #f6f7f8 36%);
+  background: linear-gradient(to right, #f6f7f8 4%, #edeef1 25%, #f6f7f8 36%);
   background-size: 1000px 100%;
 }
 
 .dark .animate-shimmer {
-  background: linear-gradient(to right,
-      #1f2937 4%,
-      #374151 25%,
-      #1f2937 36%);
+  background: linear-gradient(to right, #1f2937 4%, #374151 25%, #1f2937 36%);
   background-size: 1000px 100%;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.custom-checkbox {
+  appearance: none;
+  background-color: transparent;
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.25em;
+  height: 1.25em;
+  border: 2px solid #4c9a6b;
+  border-radius: 0.35rem;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.custom-checkbox::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em white;
+  transform-origin: center;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+.custom-checkbox:checked {
+  background-color: #2bee79;
+  border-color: #2bee79;
+}
+.custom-checkbox:checked::before {
+  transform: scale(1);
+}
+.custom-checkbox:indeterminate {
+  background-color: #2bee79;
+  border-color: #2bee79;
+}
+.custom-checkbox:indeterminate::before {
+  transform: scale(1);
+  clip-path: inset(40% 0 40% 0);
 }

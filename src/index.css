@@ -1,0 +1,28 @@
+@import "tailwindcss";
+@import "../tailwind-global.css";
+
+/* 1. Use a better box model everywhere */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Root & body sizing */
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* 4. Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}

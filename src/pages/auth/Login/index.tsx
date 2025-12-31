@@ -5,13 +5,28 @@ import { useAppMutation } from "../../../react-query/useAppMutation";
 import { authService } from "../../../services/auth/auth.service";
 import type { LoginPayload } from "../../../services/auth/auth.types";
 
+import { useSetAtom } from "jotai";
+import { tokenAtom, userIdAtom, roleAtom, firstNameAtom, lastNameAtom } from "../../../atoms/auth/auth.atoms";
+
 const Login = () => {
   const navigate = useNavigate();
+  const setToken = useSetAtom(tokenAtom);
+  const setUserId = useSetAtom(userIdAtom);
+  const setRole = useSetAtom(roleAtom);
+  const setFirstName = useSetAtom(firstNameAtom);
+  const setLastName = useSetAtom(lastNameAtom);
 
   const { mutate: login, isPending } = useAppMutation(
     (values: LoginPayload) => authService.login(values),
     {
-      onSuccess: () => {
+      onSuccess: (response) => {
+        const { token, user } = response.data;
+        setToken(token);
+        setUserId(user.id);
+        setRole(user.role);
+        setFirstName(user.profile.firstName);
+        setLastName(user.profile.lastName);
+
         message.success("Login successful!");
         navigate(ROUTES.DASHBOARD);
       },

@@ -1,19 +1,47 @@
-import { Link, useLocation } from "react-router-dom";
-import { Layout, Input, Badge, Avatar } from "antd";
-import { SearchOutlined, BellOutlined } from "@ant-design/icons";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Layout, Input, Badge, Avatar, Dropdown } from "antd";
+import type { MenuProps } from "antd";
+import { SearchOutlined, BellOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Leaf } from "lucide-react";
 import { ROUTES } from "../../constants/routes";
+import { useAtom } from "jotai";
+import { tokenAtom, userIdAtom, roleAtom, firstNameAtom, lastNameAtom } from "../../atoms/auth/auth.atoms";
+import { RESET } from "jotai/utils";
 
 const { Header } = Layout;
 
 const Navigation = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [, setToken] = useAtom(tokenAtom);
+  const [, setUserId] = useAtom(userIdAtom);
+  const [, setRole] = useAtom(roleAtom);
+  const [firstName, setFirstName] = useAtom(firstNameAtom);
+  const [, setLastName] = useAtom(lastNameAtom);
 
   const isActive = (path: string) => {
     if (path === "/dashboard")
       return location.pathname === "/" || location.pathname === "/dashboard";
     return location.pathname === path;
   };
+
+  const handleLogout = () => {
+    setToken(RESET);
+    setUserId(RESET);
+    setRole(RESET);
+    setFirstName(RESET);
+    setLastName(RESET);
+    navigate(ROUTES.LOGIN);
+  };
+
+  const items: MenuProps["items"] = [
+    {
+      key: "logout",
+      label: "Logout",
+      icon: <LogoutOutlined />,
+      onClick: handleLogout,
+    },
+  ];
 
   return (
     <Header
@@ -59,51 +87,46 @@ const Navigation = () => {
           <nav className="hidden lg:flex items-center gap-7 mr-4">
             <Link
               to={ROUTES.DASHBOARD}
-              className={`text-[15px] font-bold transition-colors ${
-                isActive(ROUTES.DASHBOARD)
-                  ? "text-slate-900"
-                  : "text-slate-500 hover:text-slate-800"
-              }`}
+              className={`text-[15px] font-bold transition-colors ${isActive(ROUTES.DASHBOARD)
+                ? "text-slate-900"
+                : "text-slate-500 hover:text-slate-800"
+                }`}
             >
               Dashboard
             </Link>
             <Link
               to={ROUTES.EXPLORE}
-              className={`text-[15px] font-bold transition-colors ${
-                isActive(ROUTES.EXPLORE)
-                  ? "text-slate-900"
-                  : "text-slate-500 hover:text-slate-800"
-              }`}
+              className={`text-[15px] font-bold transition-colors ${isActive(ROUTES.EXPLORE)
+                ? "text-slate-900"
+                : "text-slate-500 hover:text-slate-800"
+                }`}
             >
               Explore
             </Link>
             <Link
               to={ROUTES.SKILLS}
-              className={`text-[15px] font-bold transition-colors ${
-                isActive(ROUTES.SKILLS)
-                  ? "text-slate-900"
-                  : "text-slate-500 hover:text-slate-800"
-              }`}
+              className={`text-[15px] font-bold transition-colors ${isActive(ROUTES.SKILLS)
+                ? "text-slate-900"
+                : "text-slate-500 hover:text-slate-800"
+                }`}
             >
               My skills
             </Link>
             <Link
               to={ROUTES.SESSIONS}
-              className={`text-[15px] font-bold transition-colors ${
-                isActive(ROUTES.SESSIONS)
-                  ? "text-slate-900"
-                  : "text-slate-500 hover:text-slate-800"
-              }`}
+              className={`text-[15px] font-bold transition-colors ${isActive(ROUTES.SESSIONS)
+                ? "text-slate-900"
+                : "text-slate-500 hover:text-slate-800"
+                }`}
             >
               My Sessions
             </Link>
             <Link
               to={ROUTES.WALLET}
-              className={`text-[15px] font-bold transition-colors ${
-                isActive(ROUTES.WALLET)
-                  ? "text-slate-900"
-                  : "text-slate-500 hover:text-slate-800"
-              }`}
+              className={`text-[15px] font-bold transition-colors ${isActive(ROUTES.WALLET)
+                ? "text-slate-900"
+                : "text-slate-500 hover:text-slate-800"
+                }`}
             >
               My Wallet
             </Link>
@@ -113,11 +136,15 @@ const Navigation = () => {
             <Badge dot color="#ef4444" offset={[-2, 5]}>
               <BellOutlined className="text-[22px] text-slate-600 cursor-pointer hover:text-slate-900 transition-colors" />
             </Badge>
-            <Avatar
-              src="https://i.pravatar.cc/150?u=jamie"
-              size={40}
-              className="cursor-pointer border-2 border-white shadow-sm"
-            />
+            <Dropdown menu={{ items }} placement="bottomRight" arrow>
+              <Avatar
+                src="https://i.pravatar.cc/150?u=trade-skills-user" // Default or placeholder
+                size={40}
+                className="cursor-pointer border-2 border-white shadow-sm"
+              >
+                {firstName ? firstName[0].toUpperCase() : "U"}
+              </Avatar>
+            </Dropdown>
           </div>
         </div>
       </div>

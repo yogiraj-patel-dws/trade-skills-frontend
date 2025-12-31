@@ -78,16 +78,6 @@ const Navigation = () => {
           </span>
         </Link>
 
-        {/* Center Section: Search Bar */}
-        <div className="hidden md:flex flex-1 max-w-md mx-8">
-          <Input
-            prefix={<SearchOutlined className="text-slate-400 mr-2" />}
-            placeholder="Find a skill to learn..."
-            className="bg-[#F1F5F9] border-none rounded-2xl h-11 hover:bg-slate-200 focus:bg-white transition-all"
-            style={{ fontSize: "15px" }}
-          />
-        </div>
-
         {/* Right Section: Nav Links & Profile */}
         <div className="flex items-center gap-6">
           <nav className="hidden lg:flex items-center gap-7 mr-4">

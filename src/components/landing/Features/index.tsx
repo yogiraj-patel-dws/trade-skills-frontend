@@ -1,6 +1,26 @@
 import { CheckCircle, BookOpen, Users } from 'lucide-react';
 
-export default function Features() {
+interface WhyTradeSkillsItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface WhyTradeSkills {
+  forLearners: WhyTradeSkillsItem[];
+  forTeachers: WhyTradeSkillsItem[];
+}
+
+interface FeaturesProps {
+  whyTradeSkills?: WhyTradeSkills;
+}
+
+export default function Features({ whyTradeSkills }: FeaturesProps) {
+  if (!whyTradeSkills) return null;
+
+  const learnerFeatures = whyTradeSkills.forLearners;
+  const teacherFeatures = whyTradeSkills.forTeachers;
+
   return (
     <section className="px-6">
       <div className="text-center mb-10">
@@ -21,18 +41,12 @@ export default function Features() {
           <h3 className="text-2xl font-bold mb-6">For Learners</h3>
           
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <CheckCircle className="text-[#2beea0]" size={20} />
-              <span className="text-slate-700">Access thousands of skills for free.</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <CheckCircle className="text-[#2beea0]" size={20} />
-              <span className="text-slate-700">Learn at your own pace with real people.</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <CheckCircle className="text-[#2beea0]" size={20} />
-              <span className="text-slate-700">Expand your network globally.</span>
-            </div>
+            {learnerFeatures.map((feature, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <CheckCircle className="text-[#2beea0]" size={20} />
+                <span className="text-slate-700">{feature.title}</span>
+              </div>
+            ))}
           </div>
           
           <button className="mt-6 text-[#2beea0] font-bold text-sm hover:underline">
@@ -50,18 +64,12 @@ export default function Features() {
           <h3 className="text-2xl font-bold mb-6">For Teachers</h3>
           
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <CheckCircle className="text-[#2beea0]" size={20} />
-              <span className="text-slate-700">Reinforce your knowledge by teaching.</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <CheckCircle className="text-[#2beea0]" size={20} />
-              <span className="text-slate-700">Build a reputation as an expert.</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <CheckCircle className="text-[#2beea0]" size={20} />
-              <span className="text-slate-700">Earn community credits for premium features.</span>
-            </div>
+            {teacherFeatures.map((feature, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <CheckCircle className="text-[#2beea0]" size={20} />
+                <span className="text-slate-700">{feature.title}</span>
+              </div>
+            ))}
           </div>
           
           <button className="mt-6 text-[#2beea0] font-bold text-sm hover:underline">

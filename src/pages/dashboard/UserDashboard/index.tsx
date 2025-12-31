@@ -1,13 +1,49 @@
 import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { TrendingUp } from 'lucide-react';
-import { DASHBOARD_STATS, UPCOMING_SESSIONS, RECOMMENDATIONS, ACTIVITY_ITEMS } from '../../../constants/constants';
+import { useDashboard } from '../../../services/dashboard/dashboard.service';
 import StatsCard from '../../../components/dashboard/StatsCard';
 import SessionCard from '../../../components/dashboard/SessionCard';
 import RecommendationCard from '../../../components/dashboard/RecommendationCard';
 import ActivityItem from '../../../components/dashboard/ActivityItem';
 
 const UserDashboard = () => {
+  const { data, isLoading, error } = useDashboard();
+
+  if (isLoading) return <div className="flex justify-center items-center min-h-screen">Loading...</div>;
+  if (error) return <div className="flex justify-center items-center min-h-screen text-red-500">Error loading dashboard</div>;
+
+  const dashboardData = data?.data;
+  const stats = dashboardData?.stats;
+  const user = dashboardData?.user;
+
+  const statsCards = [
+    { 
+      label: 'Available Credits', 
+      value: String(stats?.availableCredits || 0), 
+      trend: `+${stats?.creditsChangeThisWeek || 0} this week`,
+      icon: () => <div>💰</div>,
+      color: 'bg-green-100',
+      iconColor: 'text-green-600'
+    },
+    { 
+      label: 'Sessions Taught', 
+      value: String(stats?.sessionsTaught || 0), 
+      trend: `+${stats?.sessionsTaughtThisWeek || 0} this week`,
+      icon: () => <div>📚</div>,
+      color: 'bg-blue-100',
+      iconColor: 'text-blue-600'
+    },
+    { 
+      label: 'Skills Learned', 
+      value: String(stats?.skillsLearned || 0), 
+      trend: '+0 this week',
+      icon: () => <div>🎯</div>,
+      color: 'bg-purple-100',
+      iconColor: 'text-purple-600'
+    },
+  ];
+
   return (
     <div className="w-full min-h-screen" style={{background: 'linear-gradient(135deg, #e8fff2 0%, #f0fdf4 50%, #f8fafc 100%)'}}> 
       <main className="px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
@@ -16,10 +52,10 @@ const UserDashboard = () => {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 lg:mb-10 gap-4">
           <div className="w-full sm:w-auto">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Welcome back, Jamie! 👋
+              Welcome back, {user?.profile.firstName}! 👋
             </h1>
             <p className="text-slate-500 text-sm sm:text-base lg:text-lg mt-1 font-medium">
-              You have <span className="text-green-600 font-bold">2 upcoming sessions</span> this week.
+              You have <span className="text-green-600 font-bold">{stats?.upcomingSessionsCount || 0} upcoming sessions</span> this week.
             </p>
           </div>
           <Button 
@@ -39,7 +75,7 @@ const UserDashboard = () => {
           <div className="xl:col-span-8 space-y-6 sm:space-y-8 lg:space-y-10">
             {/* Stats Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {DASHBOARD_STATS.map((stat: any, i: number) => (
+              {statsCards.map((stat, i) => (
                 <StatsCard key={i} {...stat} />
               ))}
             </div>
@@ -51,9 +87,24 @@ const UserDashboard = () => {
                 <button className="text-green-600 font-bold hover:underline text-sm sm:text-base">View Calendar</button>
               </div>
               <div className="space-y-3 sm:space-y-4">
-                {UPCOMING_SESSIONS.map((session: any) => (
-                  <SessionCard key={session.id} {...session} />
-                ))}
+                {dashboardData?.upcomingSessions.length ? (
+                  dashboardData.upcomingSessions.map((session) => (
+                    <SessionCard 
+                      key={session.id} 
+                      id={1}
+                      title={session.title}
+                      time="10:00 AM"
+                      date="Today"
+                      instructor="John Doe"
+                      type="Online"
+                      img="https://via.placeholder.com/80"
+                      action="Join"
+                      isPrimary={true}
+                    />
+                  ))
+                ) : (
+                  <p className="text-slate-500">No upcoming sessions</p>
+                )}
               </div>
             </section>
 
@@ -64,9 +115,22 @@ const UserDashboard = () => {
                 <button className="text-green-600 font-bold hover:underline text-sm sm:text-base">Explore All</button>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {RECOMMENDATIONS.map((item: any, i: number) => (
-                  <RecommendationCard key={i} {...item} />
-                ))}
+                {dashboardData?.recommendedSessions.length ? (
+                  dashboardData.recommendedSessions.map((item, i) => (
+                    <RecommendationCard 
+                      key={i} 
+                      title={item.title}
+                      author="Expert Instructor"
+                      rating={4.8}
+                      reviews={120}
+                      credits={25}
+                      tag="Popular"
+                      img="https://via.placeholder.com/300x200"
+                    />
+                  ))
+                ) : (
+                  <p className="text-slate-500">No recommendations available</p>
+                )}
               </div>
             </section>
           </div>
@@ -81,13 +145,25 @@ const UserDashboard = () => {
               </div>
               
               <div className="ml-1">
-                {ACTIVITY_ITEMS.map((item: any, i: number) => (
-                  <ActivityItem 
-                    key={i}
-                    {...item}
-                    isLast={i === ACTIVITY_ITEMS.length - 1}
-                  />
-                ))}
+                {dashboardData?.communityActivity.length ? (
+                  dashboardData.communityActivity.map((item, i) => (
+                    <ActivityItem 
+                      key={i}
+                      avatar="https://via.placeholder.com/40"
+                      text={{
+                        name: "User",
+                        action: item.type.replace('_', ' '),
+                        skill: "",
+                        detail: item.message
+                      }}
+                      time="2h ago"
+                      color="bg-green-500"
+                      isLast={i === dashboardData.communityActivity.length - 1}
+                    />
+                  ))
+                ) : (
+                  <p className="text-slate-500">No recent activity</p>
+                )}
               </div>
 
               <button className="w-full text-emerald-600 font-extrabold text-[10px] sm:text-[11px] mt-6 sm:mt-8 hover:text-emerald-700 transition-colors tracking-widest uppercase">

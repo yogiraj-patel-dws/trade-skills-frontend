@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Repeat, Twitter, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import type { FooterData } from '../../../services/community/community.types';
 
 interface FooterProps {
@@ -40,7 +41,11 @@ const Footer = ({ footerData }: FooterProps) => {
                 <h4 className="font-bold mb-4">Platform</h4>
                 <div className="flex flex-col gap-3 text-sm text-slate-500">
                   {footerData.links.platform.map((link, i) => (
-                    <a key={i} href={link.url}>{link.name}</a>
+                    link.url.startsWith('/') ? (
+                      <Link key={i} to={link.url} className="hover:text-[#2beea0]">{link.name}</Link>
+                    ) : (
+                      <a key={i} href={link.url} className="hover:text-[#2beea0]">{link.name}</a>
+                    )
                   ))}
                 </div>
               </div>
@@ -48,7 +53,11 @@ const Footer = ({ footerData }: FooterProps) => {
                 <h4 className="font-bold mb-4">Company</h4>
                 <div className="flex flex-col gap-3 text-sm text-slate-500">
                   {footerData.links.company.map((link, i) => (
-                    <a key={i} href={link.url}>{link.name}</a>
+                    link.url.startsWith('/') ? (
+                      <Link key={i} to={link.url} className="hover:text-[#2beea0]">{link.name}</Link>
+                    ) : (
+                      <a key={i} href={link.url} className="hover:text-[#2beea0]">{link.name}</a>
+                    )
                   ))}
                 </div>
               </div>
@@ -56,7 +65,11 @@ const Footer = ({ footerData }: FooterProps) => {
                 <h4 className="font-bold mb-4">Legal</h4>
                 <div className="flex flex-col gap-3 text-sm text-slate-500">
                   {footerData.links.legal.map((link, i) => (
-                    <a key={i} href={link.url}>{link.name}</a>
+                    link.url.startsWith('/') ? (
+                      <Link key={i} to={link.url} className="hover:text-[#2beea0]">{link.name}</Link>
+                    ) : (
+                      <a key={i} href={link.url} className="hover:text-[#2beea0]">{link.name}</a>
+                    )
                   ))}
                 </div>
               </div>

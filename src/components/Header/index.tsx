@@ -120,9 +120,6 @@ const Navigation = () => {
           </nav>
 
           <div className="flex items-center gap-5 border-l border-slate-100 pl-6">
-            <Badge dot color="#ef4444" offset={[-2, 5]}>
-              <BellOutlined className="text-[22px] text-slate-600 cursor-pointer hover:text-slate-900 transition-colors" />
-            </Badge>
             <Dropdown menu={{ items }} placement="bottomRight" arrow>
               <Avatar
                 src="https://i.pravatar.cc/150?u=trade-skills-user" // Default or placeholder

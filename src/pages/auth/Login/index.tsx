@@ -6,7 +6,13 @@ import { authService } from "../../../services/auth/auth.service";
 import type { LoginPayload } from "../../../services/auth/auth.types";
 
 import { useSetAtom } from "jotai";
-import { tokenAtom, userIdAtom, roleAtom, firstNameAtom, lastNameAtom } from "../../../atoms/auth/auth.atoms";
+import {
+  tokenAtom,
+  userIdAtom,
+  roleAtom,
+  firstNameAtom,
+  lastNameAtom,
+} from "../../../atoms/auth/auth.atoms";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,6 +26,7 @@ const Login = () => {
     (values: LoginPayload) => authService.login(values),
     {
       onSuccess: (response) => {
+        console.log("Login successful:", response);
         const { token, user } = response.data;
         setToken(token);
         setUserId(user.id);
@@ -31,12 +38,14 @@ const Login = () => {
         navigate(ROUTES.DASHBOARD);
       },
       onError: (error) => {
+        console.error("Login error:", error);
         message.error(error.message || "Login failed. Please try again.");
       },
     }
   );
 
   const onFinish = (values: LoginPayload) => {
+    console.log("Form submitted with values:", values);
     login(values);
   };
 
@@ -73,7 +82,12 @@ const Login = () => {
           </div>
 
           {/* FORM */}
-          <Form className="flex flex-col gap-5" onFinish={onFinish}>
+          <Form
+            className="flex flex-col gap-5"
+            onFinish={onFinish}
+            layout="vertical"
+            preserve={false}
+          >
             {/* EMAIL */}
             <div className="space-y-1.5 group">
               <label

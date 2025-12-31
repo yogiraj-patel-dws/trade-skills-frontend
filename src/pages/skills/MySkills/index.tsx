@@ -42,6 +42,37 @@ const formatLevel = (level: string): string => {
   return levelMap[level] || level;
 };
 
+// Dummy skills data as fallback
+const dummySkills: SkillCardData[] = [
+  {
+    id: 'dummy-1',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400',
+    title: 'Web Development',
+    icon: Code,
+    level: 'Intermediate',
+    duration: '3 hours',
+    credits: 75,
+  },
+  {
+    id: 'dummy-2',
+    image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400',
+    title: 'UI/UX Design',
+    icon: Palette,
+    level: 'Beginner',
+    duration: '2 hours',
+    credits: 50,
+  },
+  {
+    id: 'dummy-3',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400',
+    title: 'Digital Marketing',
+    icon: Briefcase,
+    level: 'Advanced',
+    duration: '4 hours',
+    credits: 100,
+  },
+];
+
 // Transform API skill data to SkillCard format
 const transformSkillToCard = (apiSkill: ApiSkill, userSkill: ApiSkill['userSkills'][0]): SkillCardData => {
   const defaultImage = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400';
@@ -73,10 +104,10 @@ const MySkills = () => {
     }
   );
 
-  // Transform API data to card format, showing all skills
+  // Transform API data to card format, showing all skills or dummy data as fallback
   const skillsData = useMemo(() => {
     if (!apiSkills || !Array.isArray(apiSkills)) {
-      return [];
+      return dummySkills;
     }
     
     const transformed: SkillCardData[] = [];
@@ -114,7 +145,9 @@ const MySkills = () => {
         transformed.push(transformSkillToCard(skill, defaultUserSkill));
       }
     });
-    return transformed;
+    
+    // Return dummy data if no skills found
+    return transformed.length > 0 ? transformed : dummySkills;
   }, [apiSkills]);
 
   const handleAddSkill = () => {
@@ -201,25 +234,16 @@ const MySkills = () => {
 
         {/* Skills Grid */}
         {!isLoading && !error && (
-          <>
-            {skillsData.length === 0 ? (
-              <Empty
-                description="No skills found. Add a skill to get started!"
-                className="py-20"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            {skillsData.map((skill: SkillCardData) => (
+              <SkillCard 
+                key={skill.id} 
+                skill={skill}
+                onEdit={handleEdit}
+                onDelete={handleDeleteClick}
               />
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-                {skillsData.map((skill: SkillCardData) => (
-                  <SkillCard 
-                    key={skill.id} 
-                    skill={skill}
-                    onEdit={handleEdit}
-                    onDelete={handleDeleteClick}
-                  />
-                ))}
-              </div>
-            )}
-          </>
+            ))}
+          </div>
         )}
       </main>
 

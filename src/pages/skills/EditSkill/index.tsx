@@ -4,6 +4,9 @@ import { ROUTES } from '../../../constants/routes';
 import { SkillForm } from '../../../components/skills/SkillForm';
 import type { FormData, Topic, UploadedFiles } from '../../../components/skills/SkillForm';
 
+import { useSkills } from '../../../services/user/user.service';
+import type { UserSkill } from '../../../services/user/user.service';
+
 // Mock function to fetch skill data - replace with actual API call
 const fetchSkillData = (skillId: string) => {
   // This is mock data - in real app, fetch from API
@@ -45,6 +48,12 @@ const fetchSkillData = (skillId: string) => {
 export const EditSkill: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const { data: skills = [] } = useSkills();
+
+  const categories = React.useMemo(() => {
+    const cats = (skills || []).map((s: UserSkill) => s.category);
+    return [...new Set(cats)];
+  }, [skills]);
 
   // Fetch skill data (replace with actual API call)
   const skillData = id ? fetchSkillData(id) : null;
@@ -82,6 +91,8 @@ export const EditSkill: React.FC = () => {
       onCancel={handleCancel}
       submitButtonText="Update Skill"
       isEditMode={true}
+      availableCategories={categories}
+      availableSkills={skills}
     />
   );
 };

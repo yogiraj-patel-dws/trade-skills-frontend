@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons';
 
 interface SessionCardProps {
+  id?: string;
   title: string;
   host: string;
   duration: string;
@@ -17,9 +18,10 @@ interface SessionCardProps {
   image: string;
   hostImage: string;
   date?: string;
+  onDelete?: (id: string) => void;
 }
 
-const SessionCard = ({ title, host, duration, level, cost, status, image, hostImage, date }: SessionCardProps) => {
+const SessionCard = ({ id, title, host, duration, level, cost, status, image, hostImage, date, onDelete }: SessionCardProps) => {
   const isScheduled = status === 'Scheduled';
   const isRequested = status === 'Requested';
   const isCompleted = status === 'Completed';
@@ -79,7 +81,20 @@ const SessionCard = ({ title, host, duration, level, cost, status, image, hostIm
                   <Tag icon={<CheckCircleFilled />} color="default" className="px-3 sm:px-4 py-1 rounded-lg sm:rounded-xl font-bold border-none text-xs sm:text-sm h-7 sm:h-9 flex items-center m-0">Done</Tag>
                 )}
 
-                <Dropdown menu={{ items: [{ key: '1', label: 'Edit' }, { key: '2', label: 'Cancel' }] }} trigger={['click']}>
+                <Dropdown 
+                  menu={{ 
+                    items: [
+                      { key: '2', label: 'Cancel' },
+                      { 
+                        key: '3', 
+                        label: 'Delete', 
+                        danger: true,
+                        onClick: () => id && onDelete?.(id)
+                      }
+                    ] 
+                  }} 
+                  trigger={['click']}
+                >
                   <Button type="text" shape="circle" size="small" className="sm:size-auto" icon={<MoreOutlined />} />
                 </Dropdown>
               </div>

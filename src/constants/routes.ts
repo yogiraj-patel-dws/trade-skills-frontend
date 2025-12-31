@@ -20,6 +20,7 @@ export const ROUTES = {
   SKILL_DETAIL: "/skills/:id",
   EDIT_SKILL: "/skills/edit/:id",
   EXPLORE: "/explore",
+  EXPLORE_DETAIL: "/explore/:id",
   SESSIONS_REQUEST: "/sessions/request",
   SESSIONS: "/sessions",
   SESSION_DETAIL: "/sessions/:id",

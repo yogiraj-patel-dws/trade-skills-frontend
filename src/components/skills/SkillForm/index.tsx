@@ -29,6 +29,8 @@ export interface UploadedFiles {
     videoUrl?: string; // For edit mode - existing video URL
 }
 
+import type { UserSkill } from '../../../services/user/user.service';
+
 interface SkillFormProps {
     initialFormData?: FormData;
     initialTopics?: Topic[];
@@ -37,6 +39,8 @@ interface SkillFormProps {
     onCancel: () => void;
     submitButtonText?: string;
     isEditMode?: boolean;
+    availableCategories: string[];
+    availableSkills: UserSkill[];
 }
 
 export const SkillForm: React.FC<SkillFormProps> = ({
@@ -46,6 +50,8 @@ export const SkillForm: React.FC<SkillFormProps> = ({
     onCancel,
     submitButtonText = 'Create Skill',
     isEditMode = false,
+    availableCategories = [],
+    availableSkills = [],
 }) => {
     const imageInputRef = useRef<HTMLInputElement>(null);
     const videoInputRef = useRef<HTMLInputElement>(null);
@@ -281,10 +287,11 @@ export const SkillForm: React.FC<SkillFormProps> = ({
                                             onChange={(e) => handleInputChange('category', e.target.value)}
                                         >
                                             <option value="">Select Category</option>
-                                            <option value="technology">Technology</option>
-                                            <option value="design">Design</option>
-                                            <option value="business">Business</option>
-                                            <option value="other">Other</option>
+                                            {availableCategories.map((cat) => (
+                                                <option key={cat} value={cat}>
+                                                    {cat}
+                                                </option>
+                                            ))}
                                         </select>
                                         {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category}</p>}
                                     </label>
@@ -297,8 +304,20 @@ export const SkillForm: React.FC<SkillFormProps> = ({
                                             onChange={(e) => handleInputChange('subcategory', e.target.value)}
                                         >
                                             <option value="">Select Subcategory</option>
-                                            <option value="web-development">Web Development</option>
-                                            <option value="data-science">Data Science</option>
+                                            {availableSkills
+                                                .filter(
+                                                    (skill) =>
+                                                        !formData.category ||
+                                                        skill.category === formData.category
+                                                )
+                                                .map((skill) => (
+                                                    <option
+                                                        key={skill.id}
+                                                        value={skill.name}
+                                                    >
+                                                        {skill.name}
+                                                    </option>
+                                                ))}
                                         </select>
                                         {errors.subcategory && <p className="text-red-500 text-xs mt-1">{errors.subcategory}</p>}
                                     </label>

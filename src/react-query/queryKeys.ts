@@ -1,6 +1,7 @@
 export const queryKeys = {
   user: {
     all: ["users"] as const,
+    skills: ["user-skills"] as const,
     lists: () => [...queryKeys.user.all, "list"] as const,
     list: (filters: string) =>
       [...queryKeys.user.lists(), { filters }] as const,

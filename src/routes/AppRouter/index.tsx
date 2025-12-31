@@ -27,7 +27,7 @@ import MySkills from "../../pages/skills/MySkills";
 import SkillDetail from "../../pages/skills/SkillDetail";
 import AddSkill from "../../pages/skills/AddSkills";
 import ExplorePage from "../../pages/skills/ExplorePage";
-import RequestSession from "../../pages/sessions/RequestSession";
+import ExploreDetail from "../../pages/skills/ExplorePage/DetailPage";
 import MySessions from "../../pages/sessions/MySessions";
 import ReviewSession from "../../pages/sessions/ReviewSession";
 import MyWallet from "../../pages/wallet/MyWallet";
@@ -206,11 +206,11 @@ const AppRouter = () => {
         />
 
         <Route
-          path={ROUTES.SESSIONS_REQUEST}
+          path={ROUTES.EXPLORE_DETAIL}
           element={
             <ProtectedRoute>
               <AppLayout>
-                <RequestSession />
+                <ExploreDetail />
               </AppLayout>
             </ProtectedRoute>
           }

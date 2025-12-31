@@ -61,7 +61,7 @@ const Footer = ({ footerData }: FooterProps) => {
                 </div>
               </div>
             </div>
-            <div className="border-t pt-8 flex flex-col md:row justify-between items-center gap-4 text-sm text-slate-400">
+            <div className="border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-400">
               <p>{footerData.copyright}</p>
               <div className="flex items-center gap-2">
                 <span className="size-2 bg-green-500 rounded-full" />

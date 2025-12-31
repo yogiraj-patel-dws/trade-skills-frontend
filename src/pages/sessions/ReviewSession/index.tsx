@@ -1,60 +1,20 @@
 const ReviewSession = () => {
   return (
     <div className="bg-warm-gradient text-text-main font-display antialiased min-h-screen flex flex-col selection:bg-primary selection:text-white">
-      <nav className="sticky top-0 z-50 w-full border-b border-white/50 bg-white/80 backdrop-blur-md px-6 py-4 shadow-sm">
-        <div className="mx-auto flex max-w-5xl items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-dark shadow-glow">
-              <span className="material-symbols-outlined text-2xl font-bold">
-                handshake
-              </span>
-            </div>
-            <h2 className="text-xl font-extrabold tracking-tight text-text-main">
-              TradeSkill
-            </h2>
-          </div>
-          <div className="hidden md:flex items-center gap-8">
-            <a
-              className="text-text-secondary hover:text-primary-hover text-sm font-semibold transition-colors"
-              href="#"
-            >
-              Dashboard
-            </a>
-            <a
-              className="text-text-main text-sm font-bold transition-colors"
-              href="#"
-            >
-              Sessions
-            </a>
-            <a
-              className="text-text-secondary hover:text-primary-hover text-sm font-semibold transition-colors"
-              href="#"
-            >
-              Messages
-            </a>
-          </div>
-          <div className="flex items-center gap-4">
-            <button className="flex items-center gap-2 rounded-full border border-border-subtle bg-white pl-1 pr-4 py-1 transition-all hover:bg-input-bg hover:shadow-sm">
-              <div
-                className="h-8 w-8 overflow-hidden rounded-full bg-input-bg border border-border-subtle"
-                data-alt="User Avatar"
-              >
-                <span className="material-symbols-outlined text-text-secondary text-lg flex h-full w-full items-center justify-center">
-                  person
-                </span>
-              </div>
-              <span className="text-sm font-bold text-text-main">Profile</span>
-            </button>
-          </div>
-        </div>
-      </nav>
       <main className="flex-1 w-full pb-24">
         <div className="mx-auto max-w-2xl px-4 pt-12">
           <header className="mb-10 text-center md:text-left">
             <h1 className="mb-3 text-4xl md:text-5xl font-black tracking-tight text-text-main leading-[1.1]">
               How was your
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-[#25cf68]">
+              <span 
+                style={{
+                  background: 'linear-gradient(to right, #22C55E, #25cf68)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
+              >
                 session?
               </span>
             </h1>

@@ -5,7 +5,6 @@ import Features from '../../../components/landing/Features';
 import HowItWorks from '../../../components/landing/HowItWorks';
 import Testimonials from '../../../components/landing/Testimonials';
 import CallToAction from '../../../components/landing/CallToAction';
-import Footer from '../../home/Footer';
 import { useLandingPage } from '../../../services/landing/landing.service';
 import { useCommunityStories, useFooter } from '../../../services/community/community.service';
 
@@ -68,7 +67,6 @@ const Landing = () => {
         <HowItWorks howItWorks={stories?.howItWorks} />
         <Testimonials testimonials={testimonialsData} />
         <CallToAction callToAction={footerData?.data?.callToAction} />
-        <Footer footerData={footerData?.data} />
       </main>
     </div>
   );

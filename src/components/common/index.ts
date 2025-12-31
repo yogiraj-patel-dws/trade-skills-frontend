@@ -2,6 +2,7 @@ export { Button } from './Button';
 export { Input } from './Input';
 export { Select } from './Select';
 export { default as GlobalNotification } from './GlobalNotification';
+export { DeleteConfirmModal } from './DeleteConfirmModal';
 
 export type { ButtonProps } from './Button';
 export type { InputProps } from './Input';

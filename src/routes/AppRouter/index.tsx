@@ -32,6 +32,7 @@ import ReviewSession from "../../pages/sessions/ReviewSession";
 import MyWallet from "../../pages/wallet/MyWallet";
 import Plans from "../../pages/wallet/Plans";
 import WithdrawPage from "../../pages/wallet/WithdrawPage";
+import EditSkill from "../../pages/skills/EditSkill";
 
 const AppRouter = () => {
   return (
@@ -164,6 +165,17 @@ const AppRouter = () => {
             <ProtectedRoute>
               <AppLayout>
                 <AddSkill />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path={ROUTES.EDIT_SKILL}
+          element={
+            <ProtectedRoute>
+              <AppLayout>
+                <EditSkill />
               </AppLayout>
             </ProtectedRoute>
           }

@@ -298,12 +298,12 @@ const index = () => {
             <div className="flex-grow border-t border-[#e8e0ce] dark:border-white/10"></div>
           </div>
 
-          <button
+          {/* <button
             className="w-full h-[56px] flex items-center justify-center gap-3 rounded-full bg-white dark:bg-white/5 border border-[#e8e0ce] dark:border-white/10 hover:bg-[#fcfbf8] dark:hover:bg-white/10 text-[#1c170d] dark:text-white text-sm font-bold tracking-[0.015em] transition-all hover:shadow-sm active:scale-[0.98]"
             type="button"
           >
             <span>Continue with Google</span>
-          </button>
+          </button> */}
 
           <div className="mt-8 text-center">
             <p className="text-sm text-[#9c8149] dark:text-[#d4b980] font-medium">

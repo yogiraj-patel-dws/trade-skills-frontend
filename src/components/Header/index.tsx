@@ -88,14 +88,24 @@ const Navigation = () => {
               My skills
             </Link>
             <Link
-              to={ROUTES.ABOUT}
+              to={ROUTES.SESSIONS}
               className={`text-[15px] font-bold transition-colors ${
-                isActive(ROUTES.ABOUT)
+                isActive(ROUTES.SESSIONS)
                   ? "text-slate-900"
                   : "text-slate-500 hover:text-slate-800"
               }`}
             >
-              About Us
+              My Sessions
+            </Link>
+            <Link
+              to={ROUTES.WALLET}
+              className={`text-[15px] font-bold transition-colors ${
+                isActive(ROUTES.WALLET)
+                  ? "text-slate-900"
+                  : "text-slate-500 hover:text-slate-800"
+              }`}
+            >
+              My Wallet
             </Link>
           </nav>
 

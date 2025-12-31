@@ -24,6 +24,7 @@ import VerifyEmail from "../../pages/auth/VerifyEmail";
 import UserDashboard from "../../pages/dashboard/UserDashboard";
 import ProfileCompletion from "../../pages/profile/ProfileCompletion";
 import MySkills from "../../pages/skills/MySkills";
+import SkillDetail from "../../pages/skills/SkillDetail";
 import AddSkill from "../../pages/skills/AddSkills";
 import ExplorePage from "../../pages/skills/ExplorePage";
 import RequestSession from "../../pages/sessions/RequestSession";
@@ -32,6 +33,7 @@ import ReviewSession from "../../pages/sessions/ReviewSession";
 import MyWallet from "../../pages/wallet/MyWallet";
 import Plans from "../../pages/wallet/Plans";
 import WithdrawPage from "../../pages/wallet/WithdrawPage";
+import EditSkill from "../../pages/skills/EditSkill";
 
 const AppRouter = () => {
   return (
@@ -148,11 +150,44 @@ const AppRouter = () => {
         />
 
         <Route
+          path={ROUTES.SESSIONS}
+          element={
+            <ProtectedRoute>
+              <AppLayout>
+                <MySessions />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path={ROUTES.ADD_SKILL}
           element={
             <ProtectedRoute>
               <AppLayout>
                 <AddSkill />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path={ROUTES.EDIT_SKILL}
+          element={
+            <ProtectedRoute>
+              <AppLayout>
+                <EditSkill />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path={ROUTES.SKILL_DETAIL}
+          element={
+            <ProtectedRoute>
+              <AppLayout>
+                <SkillDetail />
               </AppLayout>
             </ProtectedRoute>
           }

@@ -29,10 +29,10 @@ const index = () => {
       setToast({
         type: "success",
         title: "Account created successfully",
-        description: "Welcome to TradeSkill!",
+        description: "Please login to continue.",
       });
 
-      navigate(ROUTES.DASHBOARD);
+      navigate(ROUTES.LOGIN);
     } catch (error: any) {
       setToast({
         type: "error",

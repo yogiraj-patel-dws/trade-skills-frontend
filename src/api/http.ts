@@ -5,6 +5,7 @@ import axios, {
   type InternalAxiosRequestConfig,
 } from "axios";
 import type { ApiErrorResponse } from "./apiTypes";
+import { ROUTES } from "../constants/routes";
 
 const headers: Readonly<Record<string, string | boolean>> = {
   Accept: "application/json",
@@ -27,9 +28,16 @@ class Http {
 
     http.interceptors.request.use(
       (config: InternalAxiosRequestConfig) => {
-        const token = localStorage.getItem("token");
-        if (token && config.headers) {
-          config.headers.Authorization = `Bearer ${token}`;
+        const tokenString = localStorage.getItem("tradeSkill_token");
+        if (tokenString && config.headers) {
+          try {
+            const token = JSON.parse(tokenString);
+            if (token) {
+              config.headers.Authorization = `Bearer ${token}`;
+            }
+          } catch (e) {
+            console.error("Error parsing token from local storage", e);
+          }
         }
         return config;
       },
@@ -39,6 +47,18 @@ class Http {
     http.interceptors.response.use(
       (response: AxiosResponse) => response,
       (error: any) => {
+        if (error.response?.status === 401) {
+          // Clear all auth data from local storage
+          localStorage.removeItem("tradeSkill_token");
+          localStorage.removeItem("tradeSkill_userId");
+          localStorage.removeItem("tradeSkill_role");
+          localStorage.removeItem("tradeSkill_firstName");
+          localStorage.removeItem("tradeSkill_lastName");
+
+          // Redirect to login
+          window.location.href = ROUTES.LOGIN;
+        }
+
         const customError: ApiErrorResponse = {
           status: false,
           code: error.response?.status || 500,

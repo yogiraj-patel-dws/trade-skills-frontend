@@ -211,7 +211,9 @@ const ExplorePage = () => {
                 <div
                   key={skill.skillId}
                   onClick={() => {
-                    navigate(ROUTES.EXPLORE_DETAIL.replace(":id", skill.skillId));
+                    navigate(ROUTES.EXPLORE_DETAIL.replace(":id", skill.skillId), {
+                      state: { skill },
+                    });
                   }}
                   className="group flex flex-col bg-white dark:bg-surface-dark rounded-2xl shadow-sm hover:shadow-soft hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-white/5 hover:border-primary/40 relative cursor-pointer"
                 >

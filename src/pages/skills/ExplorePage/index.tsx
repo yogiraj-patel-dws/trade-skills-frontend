@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../constants/routes";
+import { useSkills } from "../../../services/user/user.service";
 
 const ExplorePage = () => {
   const navigate = useNavigate();
+  const { data: categories } = useSkills();
+  const allSkills = categories?.flatMap((cat) => cat.userSkills) || [];
   return (
     <div className="bg-background-light dark:bg-background-dark text-text-main dark:text-white font-display antialiased selection:bg-primary selection:text-black">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -204,381 +207,96 @@ const ExplorePage = () => {
               Show Filters
             </button>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-              <div
-                onClick={() => {
-                  navigate(ROUTES.SESSIONS_REQUEST);
-                }}
-                className="group flex flex-col bg-white dark:bg-surface-dark rounded-2xl shadow-sm hover:shadow-soft hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-white/5 hover:border-primary/40 relative"
-              >
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    data-alt="Close up of coding on a laptop screen"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIORWxp1SAA6sq4nxiE5kETD7Xnlc5T4iV5NgBETzQoqmwffBcKH4AWN2Llc03D9MNsNmJ78z39lLoRAugRYTlHshg_q3Wxnuwb2TQLRbatkKxH5BT4-fJnHkBjpXTt_KH6ElhY50n89qF793CO7rZhCe16IR2HWlg68K_eD_HUM6HqotxvX9JtlzFGV6PQiNpvwSp0UJuCOo3533ba5mHnrP_hCz_QIdMVDfDllyr8MH2zhPzQLgWbGWfdwDEMClOU4JuGj-cozw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
+              {allSkills.map((skill) => (
+                <div
+                  key={skill.skillId}
+                  onClick={() => {
+                    navigate(ROUTES.EXPLORE_DETAIL.replace(":id", skill.skillId));
+                  }}
+                  className="group flex flex-col bg-white dark:bg-surface-dark rounded-2xl shadow-sm hover:shadow-soft hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-white/5 hover:border-primary/40 relative cursor-pointer"
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      src={skill.bannerImage}
+                      alt={skill.skillTitle}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
 
-                  <button className="absolute top-3 right-3 p-2 bg-white/20 hover:bg-white backdrop-blur-md rounded-full text-white hover:text-primary transition-all active:scale-95 shadow-lg">
-                    <span className="material-symbols-outlined text-[20px] block [font-variation-settings:'FILL'_0]">
-                      bookmark
-                    </span>
-                  </button>
-                  {/* Category Badge */}
-                  <span className="absolute top-3 left-3 px-2.5 py-1 bg-black/50 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/10">
-                    Technology
-                  </span>
-                </div>
-                <div className="p-4 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex text-yellow-400 text-[14px]">
-                      <span className="material-symbols-outlined fill-current [font-variation-settings:'FILL'_1]">
-                        star
+                    <button className="absolute top-3 right-3 p-2 bg-white/20 hover:bg-white backdrop-blur-md rounded-full text-white hover:text-primary transition-all active:scale-95 shadow-lg">
+                      <span className="material-symbols-outlined text-[20px] block [font-variation-settings:'FILL'_0]">
+                        bookmark
                       </span>
-                    </div>
-                    <span className="text-xs font-bold text-text-main dark:text-white">
-                      4.9
-                    </span>
-                    <span className="text-xs text-gray-500">(128)</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-text-main dark:text-white leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">
-                    Introduction to Python Programming
-                  </h3>
-                  <div className="flex items-center gap-2 mb-4 mt-2">
-                    <img
-                      className="size-6 rounded-full object-cover ring-2 ring-white dark:ring-surface-dark"
-                      data-alt="Portrait of instructor Alex Chen"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlDE5rDSNTpfgUTzi2yJQf5db9dSxKnpyj5EAmb8JTtgUMTIeWNSLGwwYsCFJAmf3mXNz7RiLez6I0QhnlWd8Ft-0M-o-Ok0EXhq0ksB8Z6_5-cZFRfmbgCyzXKmVz9uxwDcIYF_XZc6_4U62xI7FdWAOFX34wQpo90_lX7kt1HcgWfx8m_D-GI0s7MXGBGOxOD90If4QMK1wB57GqrX0g99Mz3fmY8m9Jb5RCaRNHMPsoyf7JxTA9ycwaPZdo8GbBR-J7YsJ9pss"
-                    />
-                    <span className="text-xs text-gray-500 font-medium">
-                      by Alex Chen
+                    </button>
+                    {/* Category Badge */}
+                    <span className="absolute top-3 left-3 px-2.5 py-1 bg-black/50 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/10">
+                      {skill.subcategory}
                     </span>
                   </div>
-                  <div className="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    <div className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        schedule
+                  <div className="p-4 flex flex-col flex-1">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="flex text-yellow-400 text-[14px]">
+                        <span className="material-symbols-outlined fill-current [font-variation-settings:'FILL'_1]">
+                          star
+                        </span>
+                      </div>
+                      <span className="text-xs font-bold text-text-main dark:text-white">
+                        {skill.user.profile.rating.toFixed(1)}
                       </span>
-                      90 min
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        bar_chart
+                    <h3 className="text-lg font-bold text-text-main dark:text-white leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">
+                      {skill.skillTitle}
+                    </h3>
+                    <div className="flex items-center gap-2 mb-4 mt-2">
+                      <div className="size-6 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-bold text-primary ring-2 ring-white dark:ring-surface-dark">
+                        {skill.user.profile.firstName[0]}
+                        {skill.user.profile.lastName[0]}
+                      </div>
+                      <span className="text-xs text-gray-500 font-medium">
+                        by {skill.user.profile.firstName}{" "}
+                        {skill.user.profile.lastName}
                       </span>
-                      Beginner
                     </div>
-                    <div className="flex items-center gap-1.5 px-2 py-1 bg-primary/10 rounded-md text-text-main dark:text-white">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        currency_bitcoin
-                      </span>{" "}
-                      {/* Using bitcoin symbol as generic credits */}
-                      <span className="font-bold">2 Credits</span>
+                    <div className="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 font-medium">
+                      <div className="flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-[16px] text-primary">
+                          bar_chart
+                        </span>
+                        {skill.level}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              {/* Skill Card 2 (Active Bookmark) */}
-              <div className="group flex flex-col bg-white dark:bg-surface-dark rounded-2xl shadow-sm hover:shadow-soft hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-white/5 hover:border-primary/40 relative">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    data-alt="Hands kneading dough on a wooden table"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUIf0pkfcbU85ej_0zW6GKh9O0gi92TnXKUtwmYnVqkfI_rEZjcAyVDW80hCfccXnCJ0kLHm04e1mSdP8F3G0Uheiq_FIluCGyc-JKukDTG5tFqiDl0g49MupzAJWpEXlFBisHNLPSGK87f9QrzPkftvAnALKXEAT6YBBAFTY37gqdx6AKx15Wgj6nRX6NhQ6tInXp6sqYdESvLyLP_e9H5p_SCBYBddtN0LGK0Pk9UhBEPOR19OEANrpl7Ziy2HpnBMpZzwZwN9U"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
-                  <button className="absolute top-3 right-3 p-2 bg-primary hover:bg-primary-hover backdrop-blur-md rounded-full text-black transition-all active:scale-95 shadow-lg">
-                    <span className="material-symbols-outlined text-[20px] block [font-variation-settings:'FILL'_1]">
-                      bookmark
-                    </span>
-                  </button>
-                  <span className="absolute top-3 left-3 px-2.5 py-1 bg-black/50 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/10">
-                    Cooking
-                  </span>
-                </div>
-                <div className="p-4 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex text-yellow-400 text-[14px]">
-                      <span className="material-symbols-outlined fill-current [font-variation-settings:'FILL'_1]">
-                        star
-                      </span>
-                    </div>
-                    <span className="text-xs font-bold text-text-main dark:text-white">
-                      5.0
-                    </span>
-                    <span className="text-xs text-gray-500">(42)</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-text-main dark:text-white leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">
-                    Artisan Sourdough Bread Masterclass
-                  </h3>
-                  <div className="flex items-center gap-2 mb-4 mt-2">
-                    <img
-                      className="size-6 rounded-full object-cover ring-2 ring-white dark:ring-surface-dark"
-                      data-alt="Portrait of instructor Sarah Miller"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8h1uQryxySjzVkc8YYnNrAvivFd3p4fXcjj46c0_AYIOpMnZJny9d5iRkjm0Z_w-XiQMAdfJCZncQ5AWI9d_UaC6cGz3bH6tYpgRDzBMJdL41MS3Lkol9mlxo9849nlmE1_FUhm8CkKOWUyaU2VxDnEZQSuPCZQjYz9nOwUK48pfBtQDN4zPFkrI9EiJX1LfPWcG7yUi8Swi8uJQmgWVMF6n80G0-8FA-_OxtLN9LQGOgHvfE1zabRC2uaONBLXXnCm3UaDiQXKw"
-                    />
-                    <span className="text-xs text-gray-500 font-medium">
-                      by Sarah Miller
-                    </span>
-                  </div>
-                  <div className="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    <div className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        schedule
-                      </span>
-                      120 min
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        bar_chart
-                      </span>
-                      Interm.
-                    </div>
-                    <div className="flex items-center gap-1.5 px-2 py-1 bg-primary/10 rounded-md text-text-main dark:text-white">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        currency_bitcoin
-                      </span>
-                      <span className="font-bold">4 Credits</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Skill Card 3 */}
-              <div className="group flex flex-col bg-white dark:bg-surface-dark rounded-2xl shadow-sm hover:shadow-soft hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-white/5 hover:border-primary/40 relative">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    data-alt="Abstract painting with brushes"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYvbwh9ZrFfmi4ng3G_2WcO4iCFp2fez3WyOy6KTerER14htfE5DizM-MjkKeM7hAkt1EJSa8oC7O5faqqIRlhvuRSN-7cNZ_tm6hmE6dr8to_5YYOLNlXEneKwS7wi59fDhbq2gUgQ8SiQY4jVR8qFdkQGGLtqy-wyLhyL3os3ksrbqhRY7I6QGFZgrzKHx7h_cHRvS7sgvwF9kSmBIINWQcAScZDZeKuRijDINflXlBfaJKewsyrVfNRynBSKU85EVmLvwTdBlA"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
-                  <button className="absolute top-3 right-3 p-2 bg-white/20 hover:bg-white backdrop-blur-md rounded-full text-white hover:text-primary transition-all active:scale-95 shadow-lg">
-                    <span className="material-symbols-outlined text-[20px] block [font-variation-settings:'FILL'_0]">
-                      bookmark
-                    </span>
-                  </button>
-                  <span className="absolute top-3 left-3 px-2.5 py-1 bg-black/50 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/10">
-                    Creative Arts
-                  </span>
-                </div>
-                <div className="p-4 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex text-yellow-400 text-[14px]">
-                      <span className="material-symbols-outlined fill-current [font-variation-settings:'FILL'_1]">
-                        star
-                      </span>
-                    </div>
-                    <span className="text-xs font-bold text-text-main dark:text-white">
-                      4.7
-                    </span>
-                    <span className="text-xs text-gray-500">(89)</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-text-main dark:text-white leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">
-                    Abstract Acrylic Painting Basics
-                  </h3>
-                  <div className="flex items-center gap-2 mb-4 mt-2">
-                    <img
-                      className="size-6 rounded-full object-cover ring-2 ring-white dark:ring-surface-dark"
-                      data-alt="Portrait of instructor John Doe"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3PeJqJffvV2KVa9nlSduPus9x82WSKxAFrwfXwW-aeQ1HWYhMLZ7Qjd7UngAq2maIKSdtrUEj4BsvM1t5cm0QR0ooNjxHKqPRnCuSIBPk6TozvZNSxUUf0LkPs7zC6dOLmK9pMMQlLAykzNFLbzFK1VIMbK0qNjjn2Pw4OSYcAtflziyhBeoOpnQI9avIDImyUHsH9OX4iofc8pUdhvKAuVtScBbWgLcvKkY1AuX4I8LothtggftUHwOPt4ftFWYjkcgcAFJiaps"
-                    />
-                    <span className="text-xs text-gray-500 font-medium">
-                      by John Doe
-                    </span>
-                  </div>
-                  <div className="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    <div className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        schedule
-                      </span>
-                      60 min
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        bar_chart
-                      </span>
-                      Beginner
-                    </div>
-                    <div className="flex items-center gap-1.5 px-2 py-1 bg-primary/10 rounded-md text-text-main dark:text-white">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        currency_bitcoin
-                      </span>
-                      <span className="font-bold">2 Credits</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Skill Card 4 */}
-              <div className="group flex flex-col bg-white dark:bg-surface-dark rounded-2xl shadow-sm hover:shadow-soft hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-white/5 hover:border-primary/40 relative">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    data-alt="Teacher explaining language on whiteboard"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc-t_M7w3oIsz9qDNttMaRaKSr5n1PnPZA1uxMqM_Tpd21v1xpzAoHoB85n3XBErMkpmD7GLY9Clf331C6jwRFKhFeBLzBjiC_4lPPwks8v-knaYgDVKhbWaWIv9CMyUWCg-pgKrJ2-LCeRVj4KyFmyHM8wmV6fyWt_xLhfJW8V8DltB8zdXzk6FjpkUrNh3lEiwa_w-Fq-YnpU2580GCNKK1cU5Jl3AsAMEtWFFdV9fxuBJ-zk71r19WibM2a_PSz0Vs7JSlrnZw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
-                  <button className="absolute top-3 right-3 p-2 bg-white/20 hover:bg-white backdrop-blur-md rounded-full text-white hover:text-primary transition-all active:scale-95 shadow-lg">
-                    <span className="material-symbols-outlined text-[20px] block [font-variation-settings:'FILL'_0]">
-                      bookmark
-                    </span>
-                  </button>
-                  <span className="absolute top-3 left-3 px-2.5 py-1 bg-black/50 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/10">
-                    Language
-                  </span>
-                </div>
-                <div className="p-4 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex text-yellow-400 text-[14px]">
-                      <span className="material-symbols-outlined fill-current [font-variation-settings:'FILL'_1]">
-                        star
-                      </span>
-                    </div>
-                    <span className="text-xs font-bold text-text-main dark:text-white">
-                      4.8
-                    </span>
-                    <span className="text-xs text-gray-500">(210)</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-text-main dark:text-white leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">
-                    Conversational Spanish for Travelers
-                  </h3>
-                  <div className="flex items-center gap-2 mb-4 mt-2">
-                    <img
-                      className="size-6 rounded-full object-cover ring-2 ring-white dark:ring-surface-dark"
-                      data-alt="Portrait of instructor Maria Rodriguez"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8e4WTjUsGZmJVP7wMJYp9Q-dK9o3whyo2SaDWeP-NcVRZpD7aetCaUZ7nIwGMceGyqBixrcQN7cIzt-NQaWRNpjRgCXZ-hTKWJIVnNMc9c30x-brqovOPpyO4FltTr7p_ZfZHzWT6S5leuAfqcmpGY_Y6N-50nut8fFJ5tm_9cGR2g3wuiwD1GykWdkL121aoEbWLvN2xhC6F2fii9cgo9AOMv9qsLhCsqc-31QKrGkDMCBw8hK4khnf6Qebl_IrIkGWbNRb_5pc"
-                    />
-                    <span className="text-xs text-gray-500 font-medium">
-                      by Maria Rodriguez
-                    </span>
-                  </div>
-                  <div className="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    <div className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        schedule
-                      </span>
-                      45 min
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        bar_chart
-                      </span>
-                      Beginner
-                    </div>
-                    <div className="flex items-center gap-1.5 px-2 py-1 bg-primary/10 rounded-md text-text-main dark:text-white">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        currency_bitcoin
-                      </span>
-                      <span className="font-bold">1 Credit</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/* Skill Card 5 */}
-              <div className="group flex flex-col bg-white dark:bg-surface-dark rounded-2xl shadow-sm hover:shadow-soft hover:-translate-y-1 transition-all duration-300 overflow-hidden border border-gray-100 dark:border-white/5 hover:border-primary/40 relative">
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    data-alt="Close up of yoga mat and water bottle"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc31PGD6nNdusmi0TT0U1vKTCIw9ZKYRhBN3SB9J0mEVNsKSI7Tbi5FIdCgo_VNTFfahTcT85Vl3CmvbqidNfMGmLHhDllDQZ535ki-lt0E6BsRhL-_bSKrumM9Y2yw34FwalrOEvmN4v8QDmJL7P6K71ewZLTf7XrkcYR0hL_-X7ZVhfqh3J-0_XT5j9b-jnfGT-XxptGpUPg6EQiW39N14sn8aSZoxFGAsiSPLz200q_yz_hhHmKOokJzKJcX6hanE8BVRwsNCA"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60"></div>
-                  <button className="absolute top-3 right-3 p-2 bg-white/20 hover:bg-white backdrop-blur-md rounded-full text-white hover:text-primary transition-all active:scale-95 shadow-lg">
-                    <span className="material-symbols-outlined text-[20px] block [font-variation-settings:'FILL'_0]">
-                      bookmark
-                    </span>
-                  </button>
-                  <span className="absolute top-3 left-3 px-2.5 py-1 bg-black/50 backdrop-blur-md rounded-lg text-xs font-bold text-white border border-white/10">
-                    Wellness
-                  </span>
-                </div>
-                <div className="p-4 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="flex text-yellow-400 text-[14px]">
-                      <span className="material-symbols-outlined fill-current [font-variation-settings:'FILL'_1]">
-                        star
-                      </span>
-                    </div>
-                    <span className="text-xs font-bold text-text-main dark:text-white">
-                      5.0
-                    </span>
-                    <span className="text-xs text-gray-500">(15)</span>
-                  </div>
-                  <h3 className="text-lg font-bold text-text-main dark:text-white leading-tight mb-1 group-hover:text-primary transition-colors line-clamp-2">
-                    Morning Vinyasa Yoga Flow
-                  </h3>
-                  <div className="flex items-center gap-2 mb-4 mt-2">
-                    <img
-                      className="size-6 rounded-full object-cover ring-2 ring-white dark:ring-surface-dark"
-                      data-alt="Portrait of instructor Elena"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3Za82Gqh6MzxkGSYzCPL-H7wiGa3S-QhrjgOwo1Z3heqrLqZ3LEe5Y2Q4Xg7cq75FS7H0DeZE-fFcgl_fAc9QJD9mxLcmg63rPBlHu9FmRpjgu0UUEPKJCdamfSzAh6fe9w64a9AzbLYQrFH61G9gAGbv2_EworGGuxydueMjqkl3FwbSoC4vw6KSSpzMpEh8G789mWaD3_E8L8hfxMae6_NEfDUdma1Rr-TDBEp1OPTWRz8oo-jgKnxIG0hnUPjJ6s7j_qsOlts"
-                    />
-                    <span className="text-xs text-gray-500 font-medium">
-                      by Elena G.
-                    </span>
-                  </div>
-                  <div className="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between text-xs text-gray-600 dark:text-gray-400 font-medium">
-                    <div className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        schedule
-                      </span>
-                      60 min
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        bar_chart
-                      </span>
-                      All Levels
-                    </div>
-                    <div className="flex items-center gap-1.5 px-2 py-1 bg-primary/10 rounded-md text-text-main dark:text-white">
-                      <span className="material-symbols-outlined text-[16px] text-primary">
-                        currency_bitcoin
-                      </span>
-                      <span className="font-bold">2 Credits</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col bg-white dark:bg-surface-dark rounded-2xl shadow-sm overflow-hidden border border-gray-100 dark:border-white/5 relative">
-                <div className="relative h-48 w-full bg-gray-200 dark:bg-gray-700 animate-shimmer"></div>
-                <div className="p-4 flex flex-col flex-1 gap-3">
-                  <div className="w-16 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-shimmer"></div>
-                  <div className="w-3/4 h-6 bg-gray-200 dark:bg-gray-700 rounded animate-shimmer"></div>
-                  <div className="w-1/2 h-6 bg-gray-200 dark:bg-gray-700 rounded animate-shimmer mb-2"></div>
-                  <div className="flex items-center gap-2 mt-2">
-                    <div className="size-6 rounded-full bg-gray-200 dark:bg-gray-700 animate-shimmer"></div>
-                    <div className="w-24 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-shimmer"></div>
-                  </div>
-                  <div className="mt-auto pt-4 flex justify-between">
-                    <div className="w-12 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-shimmer"></div>
-                    <div className="w-12 h-4 bg-gray-200 dark:bg-gray-700 rounded animate-shimmer"></div>
-                    <div className="w-16 h-6 bg-gray-200 dark:bg-gray-700 rounded-md animate-shimmer"></div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
-            {/* Empty State Example (Hidden visually in the grid flow, but displayed here for requirements) */}
-            <div className="mt-12 p-12 bg-white dark:bg-surface-dark rounded-3xl border border-dashed border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center text-center">
-              <div className="size-20 bg-gray-50 dark:bg-white/5 rounded-full flex items-center justify-center mb-6">
-                <span className="material-symbols-outlined text-4xl text-gray-400">
-                  sentiment_content
-                </span>
+            {allSkills.length === 0 && (
+              <div className="mt-12 p-12 bg-white dark:bg-surface-dark rounded-3xl border border-dashed border-gray-300 dark:border-gray-600 flex flex-col items-center justify-center text-center">
+                <div className="size-20 bg-gray-50 dark:bg-white/5 rounded-full flex items-center justify-center mb-6">
+                  <span className="material-symbols-outlined text-4xl text-gray-400">
+                    sentiment_content
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-text-main dark:text-white mb-2">
+                  No matching skills found
+                </h3>
+                <p className="text-gray-500 max-w-sm mb-6">
+                  We couldn't find any skills matching your current filters. Try
+                  adjusting your search criteria.
+                </p>
+                <button className="px-6 py-3 bg-primary text-black font-bold rounded-xl hover:bg-primary-hover transition-colors shadow-glow">
+                  Reset Filters
+                </button>
               </div>
-              <h3 className="text-xl font-bold text-text-main dark:text-white mb-2">
-                No matching skills found
-              </h3>
-              <p className="text-gray-500 max-w-sm mb-6">
-                We couldn't find any skills matching your current filters. Try
-                adjusting your search criteria.
-              </p>
-              <button className="px-6 py-3 bg-primary text-black font-bold rounded-xl hover:bg-primary-hover transition-colors shadow-glow">
-                Reset Filters
-              </button>
-            </div>
+            )}
 
-            <div className="mt-12 flex justify-center">
-              <button className="px-8 py-3 bg-white dark:bg-surface-dark border border-gray-200 dark:border-white/10 hover:border-primary text-text-main dark:text-white font-bold rounded-xl shadow-sm transition-all flex items-center gap-2">
-                Load More Skills
-                <span className="material-symbols-outlined">expand_more</span>
-              </button>
-            </div>
+            {allSkills.length > 0 && (
+              <div className="mt-12 flex justify-center">
+                <button className="px-8 py-3 bg-white dark:bg-surface-dark border border-gray-200 dark:border-white/10 hover:border-primary text-text-main dark:text-white font-bold rounded-xl shadow-sm transition-all flex items-center gap-2">
+                  Load More Skills
+                  <span className="material-symbols-outlined">expand_more</span>
+                </button>
+              </div>
+            )}
           </main>
         </div>
       </div>

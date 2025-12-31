@@ -4,6 +4,27 @@ import { useAppQuery } from "../../react-query/useAppQuery";
 import { useAppMutation as useMutationWrapper } from "../../react-query/useAppMutation";
 import type { User, CreateUserRequest } from "./user.types";
 
+export interface SkillItem {
+  skillId: string;
+  level: string;
+  skillTitle: string;
+  bannerImage: string;
+  demoVideo: string;
+  teachingLanguage: string;
+  prerequisites: string;
+  subcategory: string;
+  user: {
+    id: string;
+    profile: {
+      firstName: string;
+      lastName: string;
+      rating: number;
+      createdAt: string;
+      updatedAt: string;
+    };
+  };
+}
+
 export interface UserSkill {
   id: string;
   name: string;
@@ -11,7 +32,7 @@ export interface UserSkill {
   category: string;
   isActive: boolean;
   createdAt: string;
-  userSkills: any[];
+  userSkills: SkillItem[];
 }
 
 export interface AddSkillRequest {

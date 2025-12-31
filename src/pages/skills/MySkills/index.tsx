@@ -1,8 +1,8 @@
 import { SkillCard } from "../../../components/skills/SkillCard";
-import { Button } from 'antd';
-import { Monitor, BarChart3, ChefHat } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../../constants/routes';
+import { Button } from "antd";
+import { Monitor, BarChart3, ChefHat } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../../constants/routes";
 
 interface Skill {
   id: string;
@@ -23,7 +23,7 @@ const skillsData: Skill[] = [
     icon: Monitor,
     level: "Beginner",
     duration: "2 hours",
-    credits: 50
+    credits: 50,
   },
   {
     id: "2",
@@ -32,35 +32,38 @@ const skillsData: Skill[] = [
     icon: BarChart3,
     level: "Intermediate",
     duration: "3 hours",
-    credits: 75
+    credits: 75,
   },
   {
     id: "3",
-    title: 'Italian Pasta From Scratch',
-    level: 'All Levels',
-    duration: '120m',
+    title: "Italian Pasta From Scratch",
+    level: "All Levels",
+    duration: "120m",
     credits: 80,
-    image: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=400&q=80',
+    image:
+      "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=400&q=80",
     icon: ChefHat,
   },
   {
     id: "4",
-    title: 'Italian Pasta From Scratch',
-    level: 'All Levels',
-    duration: '120m',
+    title: "Italian Pasta From Scratch",
+    level: "All Levels",
+    duration: "120m",
     credits: 80,
-    image: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=400&q=80',
+    image:
+      "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=400&q=80",
     icon: ChefHat,
   },
-   {
+  {
     id: "4",
-    title: 'Italian Pasta From Scratch',
-    level: 'All Levels',
-    duration: '120m',
+    title: "Italian Pasta From Scratch",
+    level: "All Levels",
+    duration: "120m",
     credits: 80,
-    image: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=400&q=80',
+    image:
+      "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=400&q=80",
     icon: ChefHat,
-  }
+  },
 ];
 
 const MySkills = () => {
@@ -75,19 +78,26 @@ const MySkills = () => {
       <main className="px-8 py-10">
         <div className="flex justify-between items-start mb-10">
           <div>
-            <h1 className="text-3xl font-extrabold text-gray-900 mb-2">My Skills</h1>
+            <h1 className="text-3xl font-extrabold text-gray-900 mb-2">
+              My Skills
+            </h1>
             <p className="text-gray-500 text-lg">
-              Manage the skills you teach. Share your expertise and earn credits from the community.
+              Manage the skills you teach. Share your expertise and earn credits
+              from the community.
             </p>
           </div>
-          <Button 
-            type="primary" 
+          <Button
+            type="primary"
             size="large"
             onClick={handleAddSkill}
             className="bg-emerald-500! hover:bg-emerald-600! border-none! px-6 font-bold h-12 rounded-xl! shadow-sm flex items-center gap-2"
           >
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
+              <path
+                fillRule="evenodd"
+                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                clipRule="evenodd"
+              />
             </svg>
             Add Skill
           </Button>

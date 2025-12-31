@@ -98,14 +98,14 @@ const Navigation = () => {
               My Sessions
             </Link>
             <Link
-              to={ROUTES.ABOUT}
+              to={ROUTES.WALLET}
               className={`text-[15px] font-bold transition-colors ${
-                isActive(ROUTES.ABOUT)
+                isActive(ROUTES.WALLET)
                   ? "text-slate-900"
                   : "text-slate-500 hover:text-slate-800"
               }`}
             >
-              About Us
+              My Wallet
             </Link>
           </nav>
 

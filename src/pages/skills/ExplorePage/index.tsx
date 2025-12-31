@@ -5,7 +5,7 @@ const ExplorePage = () => {
   const navigate = useNavigate();
   return (
     <div className="bg-background-light dark:bg-background-dark text-text-main dark:text-white font-display antialiased selection:bg-primary selection:text-black">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-10 max-w-4xl mx-auto text-center md:text-left md:mx-0">
           <h1 className="text-3xl md:text-4xl font-black tracking-tight mb-2 text-text-main dark:text-white">
             Explore Skills

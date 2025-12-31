@@ -179,7 +179,7 @@ const Login = () => {
           </div>
 
           {/* GOOGLE */}
-          <button
+          {/* <button
             className="w-full h-14 bg-white dark:bg-[#221c10] border border-[#e8e0ce] dark:border-[#4a3e2a] rounded-full text-[#1c170d] dark:text-[#fcfbf8] font-bold text-sm hover:bg-[#fcfbf8] dark:hover:bg-[#2c2415] hover:border-[#d4c5a3] dark:hover:border-[#5c4d35] transition-all flex items-center justify-center gap-3 shadow-sm active:scale-[0.98]"
             type="button"
           >
@@ -191,7 +191,7 @@ const Login = () => {
               />
             </div>
             <span>Continue with Google</span>
-          </button>
+          </button> */}
 
           <div className="mt-8 text-center">
             <p className="text-[#9c8149] dark:text-[#b0a182] text-sm">

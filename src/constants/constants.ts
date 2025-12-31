@@ -1,4 +1,8 @@
 import { Users, BookOpen, Award, Clock, Code, Palette, Camera, Music, Wrench, Calculator, Layout, Lightbulb } from 'lucide-react';
+import boyImg from '../assets/boy.png';
+import manImg from '../assets/man.png';
+import man1Img from '../assets/man (1).png';
+import womanImg from '../assets/woman.png';
 
 export const STATS = [
   {
@@ -212,3 +216,60 @@ export const TEACHING_SESSIONS = [
     icon: "📷"
   }
 ];
+
+// About Us data
+export const STATSAboutUs = [
+  { id: 1, label: 'Skills Exchanged', value: '10k+', iconName: 'GraduationCap' },
+  { id: 2, label: 'Active Countries', value: '50+', iconName: 'Globe' },
+  { id: 3, label: 'Community Members', value: '15k+', iconName: 'Users' },
+];
+
+export const VALUES = [
+  {
+    title: 'Collaboration',
+    description: 'We grow faster together. Learning is a shared journey, not a solo mission. We believe in the power of peers.',
+    iconName: 'HandshakeIcon',
+  },
+  {
+    title: 'Trust',
+    description: 'Safety first, always. We build rigorous verification systems that ensure a secure environment for all exchanges.',
+    iconName: 'ShieldCheck',
+  },
+  {
+    title: 'Inclusivity',
+    description: 'Skills have no borders. We foster a welcoming space for everyone, everywhere, regardless of background.',
+    iconName: 'Globe2',
+  },
+];
+
+export const TEAM = [
+  { name: 'Yogiraj Patel', role: 'Founder & CEO', img:  manImg },
+  { name: 'Prince Singh', role: 'Head of Product', img: boyImg },
+  { name: 'Parthiv Pithadiya', role: 'Community Lead', img: man1Img },
+  { name: 'Khushbu Bhatt', role: 'Lead Designer', img: womanImg },
+];
+
+export const HERO_DATA = {
+  badge: 'Our Story',
+  title: 'Empowering Connections Through Skill Exchange',
+  description: 'TradeSkill began with a simple idea: everyone is an expert at something. We are moving from transactional learning to community growth, creating a world where everyone is both a student and a teacher.',
+  buttonText: 'Join the Movement',
+  image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1000',
+  imageAlt: 'Team working'
+};
+
+export const VALUES_SECTION = {
+  title: 'Our Core Values',
+  description: 'We are guided by principles that prioritize human connection, safety, and mutual growth above all else.'
+};
+
+export const TEAM_SECTION = {
+  title: 'Meet the Team',
+  description: 'The passionate individuals working behind the scenes to make skill sharing accessible to everyone.'
+};
+
+export const CTA_SECTION = {
+  title: 'Ready to share your skills with the world?',
+  description: 'Join thousands of others who are learning, teaching, and growing together on TradeSkill.',
+  secondaryButton: 'Explore Skills'
+};

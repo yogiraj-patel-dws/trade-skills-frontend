@@ -1,6 +1,8 @@
 import React from 'react';
 import { Dropdown, type MenuProps } from 'antd';
 import { MoreOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../constants/routes';
 
 interface Skill {
   id: string;
@@ -19,6 +21,12 @@ interface SkillCardProps {
 }
 
 export const SkillCard = ({ skill, onEdit, onDelete }: SkillCardProps) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(ROUTES.SKILL_DETAIL.replace(':id', skill.id));
+  };
+
   const menuItems: MenuProps['items'] = [
     {
       key: 'edit',
@@ -36,7 +44,10 @@ export const SkillCard = ({ skill, onEdit, onDelete }: SkillCardProps) => {
   ];
 
   return (
-    <div className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow w-full">
+    <div 
+      className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow w-full cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="relative h-48 overflow-hidden">
         <img 
           src={skill.image} 

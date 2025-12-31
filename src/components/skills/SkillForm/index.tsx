@@ -120,11 +120,9 @@ export const SkillForm: React.FC<SkillFormProps> = ({
 
         if (!formData.title.trim()) newErrors.title = 'Skill title is required';
         if (!formData.category) newErrors.category = 'Category is required';
-        if (!formData.subcategory) newErrors.subcategory = 'Subcategory is required';
         if (!formData.language.trim()) newErrors.language = 'Teaching language is required';
         if (!formData.prerequisites.trim()) newErrors.prerequisites = 'Prerequisites are required';
         if (!uploadedFiles.image && !uploadedFiles.imageUrl) newErrors.image = 'Cover image is required';
-        if (!uploadedFiles.video && !uploadedFiles.videoUrl) newErrors.video = 'Demo video is required';
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;

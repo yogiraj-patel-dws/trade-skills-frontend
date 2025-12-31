@@ -1,6 +1,21 @@
-import { Facebook, Instagram, Repeat, Twitter } from 'lucide-react';
+import { Facebook, Instagram, Repeat, Twitter, Linkedin } from 'lucide-react';
+import type { FooterData } from '../../../services/community/community.types';
 
-const Footer = () => {
+interface FooterProps {
+  footerData?: FooterData;
+}
+
+const Footer = ({ footerData }: FooterProps) => {
+  if (!footerData) return null;
+  const getSocialIcon = (iconName: string) => {
+    switch (iconName) {
+      case 'facebook': return <Facebook size={20} className="hover:text-[#2beea0] cursor-pointer" />;
+      case 'twitter': return <Twitter size={20} className="hover:text-[#2beea0] cursor-pointer" />;
+      case 'instagram': return <Instagram size={20} className="hover:text-[#2beea0] cursor-pointer" />;
+      case 'linkedin': return <Linkedin size={20} className="hover:text-[#2beea0] cursor-pointer" />;
+      default: return <div className="w-5 h-5" />;
+    }
+  };
   
   return (
     <div>
@@ -10,36 +25,44 @@ const Footer = () => {
               <div className="col-span-2 lg:col-span-2">
                 <div className="flex items-center gap-2 mb-6">
                   <div className="flex items-center justify-center size-8 rounded-full bg-[#2beea0]"><Repeat size={16} /></div>
-                  <span className="text-lg font-bold">TradeSkill</span>
+                  <span className="text-lg font-bold">{footerData.company.name}</span>
                 </div>
-                <p className="text-slate-500 text-sm max-w-xs mb-6">The world's friendliest skill exchange platform. Connect, learn, and grow together.</p>
+                <p className="text-slate-500 text-sm max-w-xs mb-6">{footerData.company.description}</p>
                 <div className="flex gap-4 text-slate-400">
-                  <Facebook size={20} className="hover:text-[#2beea0] cursor-pointer" />
-                  <Twitter size={20} className="hover:text-[#2beea0] cursor-pointer" />
-                  <Instagram size={20} className="hover:text-[#2beea0] cursor-pointer" />
+                  {footerData.social.map((social, i) => (
+                    <a key={i} href={social.url} target="_blank" rel="noopener noreferrer">
+                      {getSocialIcon(social.icon)}
+                    </a>
+                  ))}
                 </div>
               </div>
               <div>
                 <h4 className="font-bold mb-4">Platform</h4>
                 <div className="flex flex-col gap-3 text-sm text-slate-500">
-                  <a href="#">Browse Skills</a><a href="#">How it Works</a><a href="#">Pricing</a>
+                  {footerData.links.platform.map((link, i) => (
+                    <a key={i} href={link.url}>{link.name}</a>
+                  ))}
                 </div>
               </div>
               <div>
                 <h4 className="font-bold mb-4">Company</h4>
                 <div className="flex flex-col gap-3 text-sm text-slate-500">
-                  <a href="#">About Us</a><a href="#">Careers</a><a href="#">Blog</a>
+                  {footerData.links.company.map((link, i) => (
+                    <a key={i} href={link.url}>{link.name}</a>
+                  ))}
                 </div>
               </div>
               <div>
                 <h4 className="font-bold mb-4">Legal</h4>
                 <div className="flex flex-col gap-3 text-sm text-slate-500">
-                  <a href="#">Terms</a><a href="#">Privacy</a><a href="#">Cookies</a>
+                  {footerData.links.legal.map((link, i) => (
+                    <a key={i} href={link.url}>{link.name}</a>
+                  ))}
                 </div>
               </div>
             </div>
             <div className="border-t pt-8 flex flex-col md:row justify-between items-center gap-4 text-sm text-slate-400">
-              <p>© 2025 TradeSkill Inc. All rights reserved.</p>
+              <p>{footerData.copyright}</p>
               <div className="flex items-center gap-2">
                 <span className="size-2 bg-green-500 rounded-full" />
                 All systems operational

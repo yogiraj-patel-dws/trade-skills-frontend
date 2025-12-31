@@ -9,6 +9,7 @@ import type { ApiErrorResponse } from "./apiTypes";
 const headers: Readonly<Record<string, string | boolean>> = {
   Accept: "application/json",
   "Content-Type": "application/json",
+  'ngrok-skip-browser-warning': 'true'
 };
 
 class Http {

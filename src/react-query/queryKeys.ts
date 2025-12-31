@@ -9,5 +9,15 @@ export const queryKeys = {
     profile: (id: number) =>
       [...queryKeys.user.details(), id, "profile"] as const,
   },
+  dashboard: {
+    main: ["dashboard"] as const,
+  },
+  landing: {
+    main: ["landing"] as const,
+  },
+  community: {
+    stories: ["community-stories"] as const,
+    footer: ["footer"] as const,
+  },
   // Add other domains here (e.g., auth, products)
 };

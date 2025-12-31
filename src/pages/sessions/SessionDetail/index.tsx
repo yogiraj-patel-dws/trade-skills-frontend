@@ -1,9 +1,19 @@
-import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Button, Avatar, Tag, Card, Divider, Dropdown } from 'antd';
-import { ArrowLeftOutlined, CalendarOutlined, ClockCircleOutlined, UserOutlined, DollarOutlined, MoreOutlined } from '@ant-design/icons';
-import { TEACHING_SESSIONS, LEARNING_SESSIONS } from '../../../constants/constants';
-import DeleteConfirmModal from '../../../components/common/DeleteConfirmModal';
+import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Button, Avatar, Tag, Card, Divider, Dropdown } from "antd";
+import {
+  ArrowLeftOutlined,
+  CalendarOutlined,
+  ClockCircleOutlined,
+  UserOutlined,
+  DollarOutlined,
+  MoreOutlined,
+} from "@ant-design/icons";
+import {
+  TEACHING_SESSIONS,
+  LEARNING_SESSIONS,
+} from "../../../constants/constants";
+import DeleteConfirmModal from "../../../components/common/DeleteConfirmModal";
 
 const SessionDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,11 +36,11 @@ const SessionDetail = () => {
     setDeleteLoading(true);
     try {
       // Replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       setDeleteModalVisible(false);
-      navigate('/sessions');
+      navigate("/sessions");
     } catch (error) {
-      console.error('Error deleting session:', error);
+      console.error("Error deleting session:", error);
     } finally {
       setDeleteLoading(false);
     }
@@ -44,45 +54,51 @@ const SessionDetail = () => {
     return (
       <div className="min-h-screen bg-[#fdfbf9] flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Session not found</h2>
-          <Button onClick={() => navigate('/sessions')}>Go back to Sessions</Button>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Session not found
+          </h2>
+          <Button onClick={() => navigate("/sessions")}>
+            Go back to Sessions
+          </Button>
         </div>
       </div>
     );
   }
 
   const getStatusConfig = () => {
-    const status = ('status' in session ? session.status : 'Scheduled') as string;
+    const status = (
+      "status" in session ? session.status : "Scheduled"
+    ) as string;
     switch (status) {
-      case 'Requested':
+      case "Requested":
         return {
-          color: 'bg-yellow-50 text-yellow-700 border-yellow-200',
-          dot: 'bg-yellow-500',
-          text: 'Requested'
+          color: "bg-yellow-50 text-yellow-700 border-yellow-200",
+          dot: "bg-yellow-500",
+          text: "Requested",
         };
-      case 'Scheduled':
+      case "Scheduled":
         return {
-          color: 'bg-green-50 text-green-700 border-green-200',
-          dot: 'bg-[#2bee79]',
-          text: 'Scheduled'
+          color: "bg-green-50 text-green-700 border-green-200",
+          dot: "bg-[#2bee79]",
+          text: "Scheduled",
         };
-      case 'Completed':
+      case "Completed":
         return {
-          color: 'bg-slate-100 text-slate-600 border-slate-200',
-          dot: '',
-          text: 'Completed'
+          color: "bg-slate-100 text-slate-600 border-slate-200",
+          dot: "",
+          text: "Completed",
         };
-      case 'Rejected':
+      case "Rejected":
         return {
-          color: 'bg-red-50 text-red-600 border-red-200',
-          dot: 'bg-red-500',
-          text: 'Rejected'
+          color: "bg-red-50 text-red-600 border-red-200",
+          dot: "bg-red-500",
+          text: "Rejected",
         };
       default:
         return {
-          color: 'bg-slate-100 text-slate-600 border-slate-200',
-          dot: '',
-          text: status
+          color: "bg-slate-100 text-slate-600 border-slate-200",
+          dot: "",
+          text: status,
         };
     }
   };
@@ -94,30 +110,30 @@ const SessionDetail = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <Button 
-            icon={<ArrowLeftOutlined />} 
-            onClick={() => navigate('/sessions')}
+          <Button
+            icon={<ArrowLeftOutlined />}
+            onClick={() => navigate("/sessions")}
             className="hover:bg-white"
           >
             Back to Sessions
           </Button>
-          <Dropdown 
-            menu={{ 
+          <Dropdown
+            menu={{
               items: [
-                { 
-                  key: '2', 
-                  label: 'Delete', 
+                {
+                  key: "2",
+                  label: "Delete",
                   danger: true,
-                  onClick: handleDeleteClick
-                }
-              ] 
-            }} 
-            trigger={['click']}
+                  onClick: handleDeleteClick,
+                },
+              ],
+            }}
+            trigger={["click"]}
           >
-            <Button 
-              type="text" 
-              shape="circle" 
-              icon={<MoreOutlined />} 
+            <Button
+              type="text"
+              shape="circle"
+              icon={<MoreOutlined />}
               className="hover:bg-white"
             />
           </Dropdown>
@@ -129,7 +145,7 @@ const SessionDetail = () => {
             {/* Title and Status */}
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
               <div className="flex items-start gap-4 flex-1">
-                {'icon' in session && session.icon && (
+                {"icon" in session && session.icon && (
                   <div className="flex size-16 sm:size-20 shrink-0 items-center justify-center rounded-xl bg-slate-50">
                     <span className="text-3xl sm:text-4xl">{session.icon}</span>
                   </div>
@@ -138,8 +154,14 @@ const SessionDetail = () => {
                   <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-3">
                     {session.title}
                   </h1>
-                  <Tag className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-bold border ${statusConfig.color}`}>
-                    {statusConfig.dot && <span className={`h-2 w-2 rounded-full ${statusConfig.dot}`}></span>}
+                  <Tag
+                    className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-bold border ${statusConfig.color}`}
+                  >
+                    {statusConfig.dot && (
+                      <span
+                        className={`h-2 w-2 rounded-full ${statusConfig.dot}`}
+                      ></span>
+                    )}
                     {statusConfig.text}
                   </Tag>
                 </div>
@@ -154,9 +176,13 @@ const SessionDetail = () => {
               <div className="flex items-start gap-3">
                 <ClockCircleOutlined className="text-[#2bee79] text-xl mt-1" />
                 <div>
-                  <p className="text-sm text-slate-500 font-medium mb-1">Duration</p>
+                  <p className="text-sm text-slate-500 font-medium mb-1">
+                    Duration
+                  </p>
                   <p className="text-base font-semibold text-slate-900">
-                    {'duration' in session ? session.duration : (session as any).duration}
+                    {"duration" in session
+                      ? session.duration
+                      : (session as any).duration}
                   </p>
                 </div>
               </div>
@@ -166,15 +192,22 @@ const SessionDetail = () => {
                 <DollarOutlined className="text-[#2bee79] text-xl mt-1" />
                 <div>
                   <p className="text-sm text-slate-500 font-medium mb-1">
-                    {isTeaching ? 'Credits' : 'Cost'}
+                    {isTeaching ? "Credits" : "Cost"}
                   </p>
                   <p className="text-base font-semibold text-slate-900">
-                    {isTeaching 
-                      ? (statusConfig.text === 'Completed' 
-                          ? `Earned ${'credits' in session ? session.credits : ''}` 
-                          : `${'credits' in session ? session.credits : ''} Credits`)
-                      : `-${'cost' in session ? Math.abs(parseInt(session.cost)) : 0} Credits`
-                    }
+                    {isTeaching
+                      ? statusConfig.text === "Completed"
+                        ? `Earned ${
+                            "credits" in session ? session.credits : ""
+                          }`
+                        : `${
+                            "credits" in session ? session.credits : ""
+                          } Credits`
+                      : `-${
+                          "cost" in session
+                            ? Math.abs(parseInt(session?.cost as string))
+                            : 0
+                        } Credits`}
                   </p>
                 </div>
               </div>
@@ -184,15 +217,19 @@ const SessionDetail = () => {
                 <div className="flex items-start gap-3">
                   <UserOutlined className="text-[#2bee79] text-xl mt-1" />
                   <div className="flex-1">
-                    <p className="text-sm text-slate-500 font-medium mb-2">Learner</p>
+                    <p className="text-sm text-slate-500 font-medium mb-2">
+                      Learner
+                    </p>
                     <div className="flex items-center gap-3">
-                      <Avatar 
-                        size={40} 
-                        src={'learnerImage' in session ? session.learnerImage : ''}
+                      <Avatar
+                        size={40}
+                        src={
+                          "learnerImage" in session ? session.learnerImage : ""
+                        }
                         className="border-2 border-white"
                       />
                       <span className="text-base font-semibold text-slate-900">
-                        {'learner' in session ? session.learner : ''}
+                        {"learner" in session ? session.learner : ""}
                       </span>
                     </div>
                   </div>
@@ -201,15 +238,23 @@ const SessionDetail = () => {
                 <div className="flex items-start gap-3">
                   <UserOutlined className="text-[#2bee79] text-xl mt-1" />
                   <div className="flex-1">
-                    <p className="text-sm text-slate-500 font-medium mb-2">Host</p>
+                    <p className="text-sm text-slate-500 font-medium mb-2">
+                      Host
+                    </p>
                     <div className="flex items-center gap-3">
-                      <Avatar 
-                        size={40} 
-                        src={'hostImage' in session ? session.hostImage : (session as any).hostImage}
+                      <Avatar
+                        size={40}
+                        src={
+                          "hostImage" in session
+                            ? session.hostImage
+                            : (session as any).hostImage
+                        }
                         className="border-2 border-white"
                       />
                       <span className="text-base font-semibold text-slate-900">
-                        {'host' in session ? session.host : (session as any).host}
+                        {"host" in session
+                          ? session.host
+                          : (session as any).host}
                       </span>
                     </div>
                   </div>
@@ -217,30 +262,34 @@ const SessionDetail = () => {
               )}
 
               {/* Date/Time (if scheduled) */}
-              {statusConfig.text === 'Scheduled' && (
+              {statusConfig.text === "Scheduled" && (
                 <div className="flex items-start gap-3">
                   <CalendarOutlined className="text-[#2bee79] text-xl mt-1" />
                   <div>
-                    <p className="text-sm text-slate-500 font-medium mb-1">Scheduled For</p>
-                    <p className="text-base font-semibold text-slate-900">Today, 4:00 PM</p>
+                    <p className="text-sm text-slate-500 font-medium mb-1">
+                      Scheduled For
+                    </p>
+                    <p className="text-base font-semibold text-slate-900">
+                      Today, 4:00 PM
+                    </p>
                   </div>
                 </div>
               )}
             </div>
 
             {/* Action Buttons */}
-            {statusConfig.text === 'Requested' && isTeaching && (
+            {statusConfig.text === "Requested" && isTeaching && (
               <>
                 <Divider className="my-2" />
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Button 
-                    type="primary" 
+                  <Button
+                    type="primary"
                     size="large"
                     className="bg-[#2bee79] hover:bg-[#28d970] border-none rounded-xl font-bold h-12"
                   >
                     Accept Request
                   </Button>
-                  <Button 
+                  <Button
                     size="large"
                     className="rounded-xl font-bold h-12 border-slate-200"
                   >
@@ -250,7 +299,7 @@ const SessionDetail = () => {
               </>
             )}
 
-            {statusConfig.text === 'Scheduled' && (
+            {statusConfig.text === "Scheduled" && (
               <>
                 <Divider className="my-2" />
                 <div className="bg-green-50 border border-green-200 rounded-xl p-4">
@@ -259,12 +308,16 @@ const SessionDetail = () => {
                       <CalendarOutlined className="text-lg" />
                     </div>
                     <div>
-                      <p className="font-semibold text-green-900">Session Scheduled</p>
-                      <p className="text-sm text-green-700">Starts in 2 hours (Today, 4:00 PM)</p>
+                      <p className="font-semibold text-green-900">
+                        Session Scheduled
+                      </p>
+                      <p className="text-sm text-green-700">
+                        Starts in 2 hours (Today, 4:00 PM)
+                      </p>
                     </div>
                   </div>
-                  <Button 
-                    type="primary" 
+                  <Button
+                    type="primary"
                     size="large"
                     className="w-full bg-black hover:bg-gray-800 border-none rounded-xl font-bold h-12"
                   >
@@ -292,4 +345,3 @@ const SessionDetail = () => {
 };
 
 export default SessionDetail;
-

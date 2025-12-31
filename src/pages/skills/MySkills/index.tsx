@@ -1,8 +1,10 @@
+import React, { useState } from "react";
 import { SkillCard } from "../../../components/skills/SkillCard";
 import { Button } from "antd";
 import { Monitor, BarChart3, ChefHat } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../constants/routes";
+import DeleteConfirmModal from "../../../components/common/DeleteConfirmModal";
 
 interface Skill {
   id: string;
@@ -68,10 +70,51 @@ const skillsData: Skill[] = [
 
 const MySkills = () => {
   const navigate = useNavigate();
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [skillToDelete, setSkillToDelete] = useState<{
+    id: string;
+    title: string;
+  } | null>(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const handleAddSkill = () => {
     navigate(ROUTES.ADD_SKILL);
   };
+
+  const handleEdit = (skillId: string) => {
+    navigate(ROUTES.EDIT_SKILL.replace(":id", skillId));
+  };
+
+  const handleDeleteClick = (skillId: string) => {
+    const skill = skillsData.find((s) => s.id === skillId);
+    if (skill) {
+      setSkillToDelete({ id: skillId, title: skill.title });
+      setDeleteModalVisible(true);
+    }
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!skillToDelete) return;
+
+    setDeleteLoading(true);
+    try {
+      // Replace with actual API call
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
+
+      setDeleteModalVisible(false);
+      setSkillToDelete(null);
+    } catch (error) {
+      console.error("Error deleting skill:", error);
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteModalVisible(false);
+    setSkillToDelete(null);
+  };
+
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900">
       {/* Main Content */}
@@ -106,10 +149,26 @@ const MySkills = () => {
         {/* Grid Layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {skillsData.map((skill: Skill) => (
-            <SkillCard key={skill.id} skill={skill} />
+            <SkillCard
+              key={skill.id}
+              skill={skill}
+              onEdit={handleEdit}
+              onDelete={handleDeleteClick}
+            />
           ))}
         </div>
       </main>
+
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmModal
+        visible={deleteModalVisible}
+        title="Delete Skill"
+        message="Are you sure you want to delete this skill?"
+        itemName={skillToDelete?.title}
+        onConfirm={handleDeleteConfirm}
+        onCancel={handleDeleteCancel}
+        loading={deleteLoading}
+      />
     </div>
   );
 };

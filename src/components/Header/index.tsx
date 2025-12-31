@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Layout, Input, Badge, Avatar, Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import { SearchOutlined, BellOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Leaf } from "lucide-react";
+import { LayoutDashboard, Leaf } from "lucide-react";
 import { ROUTES } from "../../constants/routes";
 import { useAtom } from "jotai";
 import { tokenAtom, userIdAtom, roleAtom, firstNameAtom, lastNameAtom } from "../../atoms/auth/auth.atoms";
@@ -35,6 +35,12 @@ const Navigation = () => {
   };
 
   const items: MenuProps["items"] = [
+    {
+      key: "dashboard",
+      label: "Dashboard",
+      icon: <LayoutDashboard size={20} />,
+      onClick: () => navigate(ROUTES.DASHBOARD),
+    },
     {
       key: "logout",
       label: "Logout",
@@ -85,15 +91,6 @@ const Navigation = () => {
         {/* Right Section: Nav Links & Profile */}
         <div className="flex items-center gap-6">
           <nav className="hidden lg:flex items-center gap-7 mr-4">
-            <Link
-              to={ROUTES.DASHBOARD}
-              className={`text-[15px] font-bold transition-colors ${isActive(ROUTES.DASHBOARD)
-                ? "text-slate-900"
-                : "text-slate-500 hover:text-slate-800"
-                }`}
-            >
-              Dashboard
-            </Link>
             <Link
               to={ROUTES.EXPLORE}
               className={`text-[15px] font-bold transition-colors ${isActive(ROUTES.EXPLORE)

@@ -22,6 +22,7 @@ export const ROUTES = {
   EXPLORE: "/explore",
   SESSIONS_REQUEST: "/sessions/request",
   SESSIONS: "/sessions",
+  SESSION_DETAIL: "/sessions/:id",
   SESSIONS_REVIEW: "/sessions/review",
   WALLET: "/wallet",
   PLANS: "/plans",

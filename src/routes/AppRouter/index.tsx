@@ -34,6 +34,7 @@ import MyWallet from "../../pages/wallet/MyWallet";
 import Plans from "../../pages/wallet/Plans";
 import WithdrawPage from "../../pages/wallet/WithdrawPage";
 import EditSkill from "../../pages/skills/EditSkill";
+import SessionDetail from "../../pages/sessions/SessionDetail";
 
 const AppRouter = () => {
   return (
@@ -225,6 +226,18 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
+
+        <Route
+          path={ROUTES.SESSION_DETAIL}
+          element={
+            <ProtectedRoute>
+              <AppLayout>
+                <SessionDetail />
+              </AppLayout>
+            </ProtectedRoute>
+          }
+        />
+
 
         <Route
           path={ROUTES.SESSIONS_REVIEW}

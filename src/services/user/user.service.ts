@@ -51,7 +51,7 @@ export const userService = {
   getUser: (id: number) => apiClient.get<User>(`/users/${id}`),
   createUser: (data: CreateUserRequest) => apiClient.post<User>("/users", data),
   getSkills: () =>
-    apiClient.get<UserSkill[]>("/skills").then((res) => res.data),
+    apiClient.get<UserSkill[]>("/users/skills").then((res) => res.data),
   addSkill: (data: AddSkillRequest) => apiClient.post("/users/skills", data),
 };
 

@@ -1,11 +1,17 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Layout, Input, Badge, Avatar, Dropdown } from "antd";
+import { Layout, Avatar, Dropdown } from "antd";
 import type { MenuProps } from "antd";
-import { SearchOutlined, BellOutlined, LogoutOutlined } from "@ant-design/icons";
-import { LayoutDashboard, Leaf } from "lucide-react";
+
+import { LayoutDashboard, User, LogOut, Leaf } from "lucide-react";
 import { ROUTES } from "../../constants/routes";
 import { useAtom } from "jotai";
-import { tokenAtom, userIdAtom, roleAtom, firstNameAtom, lastNameAtom } from "../../atoms/auth/auth.atoms";
+import {
+  tokenAtom,
+  userIdAtom,
+  roleAtom,
+  firstNameAtom,
+  lastNameAtom,
+} from "../../atoms/auth/auth.atoms";
 import { RESET } from "jotai/utils";
 
 const { Header } = Layout;
@@ -36,15 +42,21 @@ const Navigation = () => {
 
   const items: MenuProps["items"] = [
     {
+      key: "profile",
+      label: "Profile",
+      icon: <User size={16} />,
+      onClick: () => navigate(ROUTES.PROFILE_COMPLETE),
+    },
+    {
       key: "dashboard",
       label: "Dashboard",
-      icon: <LayoutDashboard size={20} />,
+      icon: <LayoutDashboard size={16} />,
       onClick: () => navigate(ROUTES.DASHBOARD),
     },
     {
       key: "logout",
       label: "Logout",
-      icon: <LogoutOutlined />,
+      icon: <LogOut size={16} />,
       onClick: handleLogout,
     },
   ];
@@ -83,37 +95,41 @@ const Navigation = () => {
           <nav className="hidden lg:flex items-center gap-7 mr-4">
             <Link
               to={ROUTES.EXPLORE}
-              className={`text-[15px] font-bold transition-colors ${isActive(ROUTES.EXPLORE)
-                ? "text-slate-900"
-                : "text-slate-500 hover:text-slate-800"
-                }`}
+              className={`text-[15px] font-bold transition-colors ${
+                isActive(ROUTES.EXPLORE)
+                  ? "text-slate-900"
+                  : "text-slate-500 hover:text-slate-800"
+              }`}
             >
               Explore
             </Link>
             <Link
               to={ROUTES.SKILLS}
-              className={`text-[15px] font-bold transition-colors ${isActive(ROUTES.SKILLS)
-                ? "text-slate-900"
-                : "text-slate-500 hover:text-slate-800"
-                }`}
+              className={`text-[15px] font-bold transition-colors ${
+                isActive(ROUTES.SKILLS)
+                  ? "text-slate-900"
+                  : "text-slate-500 hover:text-slate-800"
+              }`}
             >
               My skills
             </Link>
             <Link
               to={ROUTES.SESSIONS}
-              className={`text-[15px] font-bold transition-colors ${isActive(ROUTES.SESSIONS)
-                ? "text-slate-900"
-                : "text-slate-500 hover:text-slate-800"
-                }`}
+              className={`text-[15px] font-bold transition-colors ${
+                isActive(ROUTES.SESSIONS)
+                  ? "text-slate-900"
+                  : "text-slate-500 hover:text-slate-800"
+              }`}
             >
               My Sessions
             </Link>
             <Link
               to={ROUTES.WALLET}
-              className={`text-[15px] font-bold transition-colors ${isActive(ROUTES.WALLET)
-                ? "text-slate-900"
-                : "text-slate-500 hover:text-slate-800"
-                }`}
+              className={`text-[15px] font-bold transition-colors ${
+                isActive(ROUTES.WALLET)
+                  ? "text-slate-900"
+                  : "text-slate-500 hover:text-slate-800"
+              }`}
             >
               My Wallet
             </Link>

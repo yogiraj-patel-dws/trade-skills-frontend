@@ -18,11 +18,11 @@ import Login from "../../pages/auth/Login";
 import Register from "../../pages/auth/Register";
 import ForgotPassword from "../../pages/auth/ForgotPassword";
 import ResetPassword from "../../pages/auth/ResetPassword";
-import VerifyEmail from "../../pages/auth/VerifyEmail";
+// import VerifyEmail from "../../pages/auth/VerifyEmail";
 
 // Protected Pages
 import UserDashboard from "../../pages/dashboard/UserDashboard";
-import ProfileCompletion from "../../pages/profile/ProfileCompletion";
+import ProfileCompletion from "../../pages/profile";
 import MySkills from "../../pages/skills/MySkills";
 import SkillDetail from "../../pages/skills/SkillDetail";
 import AddSkill from "../../pages/skills/AddSkills";
@@ -107,14 +107,14 @@ const AppRouter = () => {
             </AuthLayout>
           }
         />
-        <Route
+        {/* <Route
           path={ROUTES.VERIFY_EMAIL}
           element={
             <AuthLayout>
               <VerifyEmail />
             </AuthLayout>
           }
-        />
+        /> */}
 
         {/* Protected Routes */}
         <Route
@@ -171,7 +171,7 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-        
+
         <Route
           path={ROUTES.EDIT_SKILL}
           element={
@@ -237,7 +237,6 @@ const AppRouter = () => {
             </ProtectedRoute>
           }
         />
-
 
         <Route
           path={ROUTES.SESSIONS_REVIEW}
